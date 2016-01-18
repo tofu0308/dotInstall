@@ -1,3 +1,2 @@
-# dotInstall
-# dotInstall
-# dotInstall
+
+.install学習用
