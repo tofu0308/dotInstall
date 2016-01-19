@@ -21,11 +21,95 @@
 
 	//文字列
 	var s ='it\'s a p\te\nn'
-
 	var s ="hello" + "world"
 	var s = "5" + 5; // "55"(文字列)
 
 	console.log(s);
+
+	/*
+		条件分岐
+		if(条件){
+			true	
+		}else{
+			false
+		}
+
+		比較演算子
+		><
+		>= <=
+		=== ==
+		!== !=
+
+		論理演算子
+		AND　&&
+		OR ||
+		score > 60 && score < 80
+	*/
+
+	var score = 45;
+	if( score > 60 ){
+		console.log("ok");
+	}else if( score > 40 ){
+		console.log("soso...");
+	}else{
+		console.log("ng");
+	}
+
+	/*
+		真偽値
+			文字列：　空文字以外は　true
+			数値：　0　か　NaN　意外はtrue
+			true / false
+			object:null以外だったらtrue
+			undefind, null -> false
+	*/
+
+	if(x){
+		//処理
+	}
+
+	if(x !== ''){
+		///処理
+	}
+
+	/*
+		三項演算子
+		
+		var a, b, c;
+
+		if(条件){
+			a = b;	
+		}else{
+			a = c;
+		}
+		a = (条件)?b:c;
+	*/
+
+
+	/*
+	条件分岐
+	switchh
+	*/
+
+	var signal ="kuro";
+
+	switch(signal){
+		case "red":
+			console.log("stop");
+			break;
+		case "green":
+		case "blue":
+			console.log("go");
+			break;
+		case "yellow":
+			console.log("slowdown");
+			break;
+		default:
+			console.log("wrong");
+	}
+
+
+
 
 
 	</script>
