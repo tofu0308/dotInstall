@@ -164,6 +164,41 @@
 	console.log(name);
 	*/
 
+	/*
+	関数
+
+	function 関数名(){
+
+		処理
+	}
+
+	*/
+
+	var hello =function (name){ //無名関数・匿名関数
+		var message = "hello" + name;	//ローカル変数
+
+		return message;
+	};
+	var greet = hello("tom");
+	console.log(greet);
+	//　console.log(message);
+
+	//即時関数
+	(function　hello2(name){
+		console.log("hello2"　+ name)
+	})("即時関数太郎");
+
+	(function(){
+		var	a = 10,
+			b = 20;
+			console.log(a + b);
+	})();
+
+
+
+
+
+
 
 
 
