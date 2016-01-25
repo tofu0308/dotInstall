@@ -228,6 +228,27 @@
 	];
 	console.log("配列＝" + m[1][1])
 
+	/*
+		オブジェクト
+			名前と値
+
+		メソッド
+	*/
+
+	var user = {
+		email: "test@test.com",	//プロパティ
+		score: 80,
+		greet: function(name){ //メソッド
+			console.log("hello, " + name　+ " from" + this.email　);	//this で他のプロパティにアクセス
+		}
+	};
+	console.log(user["email"]);
+	console.log(user.email);
+	user.score=100;
+	console.log(user);
+
+	user.greet("Namae")
+
 
 
 
