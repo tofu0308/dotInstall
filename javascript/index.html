@@ -249,6 +249,43 @@
 
 	user.greet("Namae")
 
+	/*
+		組み込みオブジェクト
+
+		-　String
+		- Array
+		- Math
+		- Date
+
+	*/
+
+	// var st = new 　String("moji");
+	var st = "moji"; //これでも可
+
+	console.log("st length = " + st.length);
+	console.log(st.replace("m" , "M"));
+
+	var ar = new Array(100 , 300 , 200);
+	console.log("ar length =" + ar.length);
+	// unshift -> array <- push
+	// shift <- array -> pop
+	ar.push(500);
+	console.log(ar);
+
+	ar.splice(1,2, 800 , 1000);
+	console.log(ar);
+
+	console.log(Math.PI);
+	console.log(Math.ceil(5.3));
+	console.log(Math.floor(5.3));
+	console.log(Math.round(5.3));
+	console.log(Math.random());
+
+	var da = new Date();
+	//var da = new Date(2014, 1, 11 , 10 , 20 , 30);
+	console.log(da.getFullYear());
+	console.log(da.getMonth());　//月は0から（0＝1月）
+	console.log(da.getTime()); //1970/1/1 ~経過ミリ秒
 
 
 
@@ -256,3 +293,4 @@
 	</script>
 </body>
 </html>
+
