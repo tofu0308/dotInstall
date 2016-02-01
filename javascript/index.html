@@ -319,16 +319,17 @@
 			domTest.style.color = '#ff0000';
 			domTest.className = 'mystyle';
 
-			var greet = document.createElement('p'),
-				text = document.createTextNode('hello,world.');
-			document.body.appendChild(greet).appendChild(text);
-
-
 		</script>
 
+		<button id="add">click</button>
 
-
-
+		<script>
+			document.getElementById('add').addEventListener('click' , function(){
+				var greet = document.createElement('p'),
+					text = document.createTextNode('hello,world.');
+				document.body.appendChild(greet).appendChild(text);
+			});
+		</script>
 
 </body>
 </html>
