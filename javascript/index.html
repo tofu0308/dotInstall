@@ -288,9 +288,48 @@
 	console.log(da.getTime()); //1970/1/1 ~経過ミリ秒
 
 
+	/*
+		DOM1
 
+	*/
+
+	console.dir(window);
+	console.dir(window.outerHeight);
+
+	//window.location.href = 'http://dotinstall.com ';
+
+	//document - 今開いているページ
+	// document object model (DOM)
 
 	</script>
+
+		<h1>見出し</h1>
+		<p id="domMsg">こんにちは</p>
+
+		
+		<style>	
+			.mystyle{
+				border: solid 1px red;
+			}
+		</style>
+
+		<script>
+			var domTest = document.getElementById('domMsg');
+			domTest.textContent = 'hello';
+			domTest.style.color = '#ff0000';
+			domTest.className = 'mystyle';
+
+			var greet = document.createElement('p'),
+				text = document.createTextNode('hello,world.');
+			document.body.appendChild(greet).appendChild(text);
+
+
+		</script>
+
+
+
+
+
 </body>
 </html>
 
