@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScriptの練習</title>
+</head>
+<body>
+	<script>
+	//変数
+	var msg = "hello world";
+	console.log(msg);
+
+	//数値
+	var x = 10*2;
+	x = 10 % 4;
+	x += 5;
+	x ++;
+	x--;
+
+	console.log(x);
+
+	//文字列
+	var s ='it\'s a p\te\nn'
+	var s ="hello" + "world"
+	var s = "5" + 5; // "55"(文字列)
+
+	console.log(s);
+
+	/*
+		条件分岐
+		if(条件){
+			true	
+		}else{
+			false
+		}
+
+		比較演算子
+		><
+		>= <=
+		=== ==
+		!== !=
+
+		論理演算子
+		AND　&&
+		OR ||
+		score > 60 && score < 80
+	*/
+
+	var score = 45;
+	if( score > 60 ){
+		console.log("ok");
+	}else if( score > 40 ){
+		console.log("soso...");
+	}else{
+		console.log("ng");
+	}
+
+	/*
+		真偽値
+			文字列：　空文字以外は　true
+			数値：　0　か　NaN　意外はtrue
+			true / false
+			object:null以外だったらtrue
+			undefind, null -> false
+	*/
+
+	if(x){
+		//処理
+	}
+
+	if(x !== ''){
+		///処理
+	}
+
+	/*
+		三項演算子
+		
+		var a, b, c;
+
+		if(条件){
+			a = b;	
+		}else{
+			a = c;
+		}
+		a = (条件)?b:c;
+	*/
+
+
+	/*
+	条件分岐
+	switchh
+	*/
+
+	var signal ="kuro";
+
+	switch(signal){
+		case "red":
+			console.log("stop");
+			break;
+		case "green":
+		case "blue":
+			console.log("go");
+			break;
+		case "yellow":
+			console.log("slowdown");
+			break;
+		default:
+			console.log("wrong");
+	}
+
+
+	/*
+	ループ処理
+	while
+	do...while
+	*/
+
+	/*
+	var i = 0;
+	while(i < 10){
+		console.log(i);
+		i++;
+	}
+
+	break :loopを抜ける
+	continue : ループ処理を一階スキップ
+
+	*/
+
+	var i = 200;
+	do{
+		console.log("do while" + i);
+		i++;
+	}while(i < 10);
+
+
+	for (var i = 0; i<10; i++){
+		if(i === 5){
+			continue;
+		}
+		console.log("for" + i);
+	}
+
+	/*
+		alert
+		confirm
+		prompt
+	*/
+
+	//	alert("hello");
+	/*
+	var answer = confirm("are yo sure?");
+	console.log(answer);
+	*/
+
+	/*
+	if(confirm("削除？")){
+		alert("削除しました");
+	}else{
+		alert("中止しました");
+	}
+	
+	var name = prompt("名前を入力","太郎");
+	console.log(name);
+	*/
+
+	/*
+	関数
+
+	function 関数名(){
+
+		処理
+	}
+
+	*/
+
+	var hello =function (name){ //無名関数・匿名関数
+		var message = "hello" + name;	//ローカル変数
+
+		return message;
+	};
+	var greet = hello("tom");
+	console.log(greet);
+	//　console.log(message);
+
+	//即時関数
+	(function　hello2(name){
+		console.log("hello2"　+ name)
+	})("即時関数太郎");
+
+	(function(){
+		var	a = 10,
+			b = 20;
+			console.log(a + b);
+	})();
+
+
+	/*
+		タイマー処理
+		setInterval
+		setTimeout
+		clearTimeout
+	*/
+
+	var i = 0;
+	function show(){
+		console.log(i++);
+
+		var tid = setTimeout(function(){
+			show();
+		},1000);
+		if(i > 5){
+			clearTimeout(tid);
+		}
+	}
+	show();
+
+	/*
+		配列：グループ化されたデータ
+	*/
+
+	var point = [100,200,300,"test"];
+	console.log(point)
+
+	var m = [
+		[1,2,3],
+		[4,5,6]
+	];
+	console.log("配列＝" + m[1][1])
+
+	/*
+		オブジェクト
+			名前と値
+
+		メソッド
+	*/
+
+	var user = {
+		email: "test@test.com",	//プロパティ
+		score: 80,
+		greet: function(name){ //メソッド
+			console.log("hello, " + name　+ " from" + this.email　);	//this で他のプロパティにアクセス
+		}
+	};
+	console.log(user["email"]);
+	console.log(user.email);
+	user.score=100;
+	console.log(user);
+
+	user.greet("Namae")
+
+	/*
+		組み込みオブジェクト
+
+		-　String
+		- Array
+		- Math
+		- Date
+
+	*/
+
+	// var st = new 　String("moji");
+	var st = "moji"; //これでも可
+
+	console.log("st length = " + st.length);
+	console.log(st.replace("m" , "M"));
+
+	var ar = new Array(100 , 300 , 200);
+	console.log("ar length =" + ar.length);
+	// unshift -> array <- push
+	// shift <- array -> pop
+	ar.push(500);
+	console.log(ar);
+
+	ar.splice(1,2, 800 , 1000);
+	console.log(ar);
+
+	console.log(Math.PI);
+	console.log(Math.ceil(5.3));
+	console.log(Math.floor(5.3));
+	console.log(Math.round(5.3));
+	console.log(Math.random());
+
+	var da = new Date();
+	//var da = new Date(2014, 1, 11 , 10 , 20 , 30);
+	console.log(da.getFullYear());
+	console.log(da.getMonth());　//月は0から（0＝1月）
+	console.log(da.getTime()); //1970/1/1 ~経過ミリ秒
+
+
+	/*
+		DOM1
+
+	*/
+
+	console.dir(window);
+	console.dir(window.outerHeight);
+
+	//window.location.href = 'http://dotinstall.com ';
+
+	//document - 今開いているページ
+	// document object model (DOM)
+
+	</script>
+
+		<h1>見出し</h1>
+		<p id="domMsg">こんにちは</p>
+
+		
+		<style>	
+			.mystyle{
+				border: solid 1px red;
+			}
+		</style>
+
+		<script>
+			var domTest = document.getElementById('domMsg');
+			domTest.textContent = 'hello';
+			domTest.style.color = '#ff0000';
+			domTest.className = 'mystyle';
+
+		</script>
+
+		<button id="add">click</button>
+
+		<script>
+			document.getElementById('add').addEventListener('click' , function(){
+				var greet = document.createElement('p'),
+					text = document.createTextNode('hello,world.');
+				document.body.appendChild(greet).appendChild(text);
+			});
+		</script>
+
+</body>
+</html>
+
