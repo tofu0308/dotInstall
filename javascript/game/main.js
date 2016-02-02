@@ -39,6 +39,10 @@ window.onload = function() {
 			core.rootScene.removeChild(this);
 		});
 
+		core.rootScene.on('touchstart' , function(e){
+			bear.x = e.x;
+			bear.y = e.y;
+		});
 
 
 		core.rootScene.addChild(bear); 
