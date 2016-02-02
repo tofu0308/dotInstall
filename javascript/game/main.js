@@ -11,7 +11,7 @@ Core
 window.onload = function() {
 	var core = new Core(320,320);
 	core.preload('game/chara1.png');
-	core.fps = 5;
+	core.fps = 10;
 
 	core.onload = function(){
 		var bear = new Sprite(32, 32);
@@ -44,8 +44,22 @@ window.onload = function() {
 			bear.y = e.y;
 		});
 
+		// label
+		var label = new Label();
+		label.x = 280;
+		label.y = 5;
+		label.color = 'red'
+		label.font = '14px "Arial"';
+		label.text = '0';
+		
+		//frame数取得　-> label　書き換え
+		label.on('enterframe' , function(){
+			label.text = (core.frame / core.fps).toFixed(2);
+		});
 
-		core.rootScene.addChild(bear); 
+
+		core.rootScene.addChild(label);
+		core.rootScene.addChild(bear);
 	}
 	core.start();
 };
