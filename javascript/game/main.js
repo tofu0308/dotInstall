@@ -39,13 +39,15 @@ window.onload = function() {
 
 			//within
 			if(this.within(enemy , 10)){
-				label.text = 'HIT!';
-			}
-
-			
+				//label.text = 'HIT!';
+				
+				//白熊に接触でゲームオーバー
+				core.pushScene(gameOverScene);
+				core.stop();
+			}			
 		});
 
-
+		//敵（白熊配置）
 		var enemy = new Sprite(32, 32);
 		enemy.image = core.assets['game/chara1.png'];
 		enemy.x = 80;
@@ -53,7 +55,6 @@ window.onload = function() {
 		enemy.frame = 5;
 
 		enemy.addEventListener('enterframe' , function(){
-			
 		});
 
 		//touch -> remove
@@ -65,6 +66,11 @@ window.onload = function() {
 			bear.x = e.x;
 			bear.y = e.y;
 		});
+
+
+		//gameOver
+		var gameOverScene = new Scene();
+		gameOverScene.backgroundColor = 'black';
 
 		// label
 		var label = new Label();
