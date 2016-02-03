@@ -11,7 +11,7 @@ Core
 window.onload = function() {
 	var core = new Core(320,320);
 	core.preload('game/chara1.png');
-	core.fps = 10;
+	core.fps = 15;
 
 	core.onload = function(){
 		var Bear = Class.create(Sprite,{
@@ -20,19 +20,28 @@ window.onload = function() {
 				this.x = x;
 				this.y = y;
 				this.image = core.assets['game/chara1.png'];
+				this.frame = rand(5);
+				this.opacity = rand(100) / 100;
 
 				this.on('enterframe' , function(){
-					this.frame = this.age % 3 ;
-					this.x += 5;
-
+					this.rotate(rand(10));
 				});
 				core.rootScene.addChild(this);
 			}
 		});
 
-		//class 実行
-		var bear = new Bear(0, 100);
+		var bears = [];
+		for(var i = 0; i < 100; i++){
+			bears[i] = new Bear(rand(320), rand(320));
+		}
 
+		//class 実行
+		//var bear = new Bear(0, 100);
+
+//random 関数
+function rand(n){
+	return Math.floor(Math.random()* (n+1));
+}
 
 		/*
 		var bear = new Sprite(32, 32);
