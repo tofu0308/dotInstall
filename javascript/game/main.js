@@ -23,15 +23,24 @@ window.onload = function() {
 				this.frame = rand(5);
 				this.opacity = rand(100) / 100;
 
+				//timeline(tl)
+				this.tl.moveBy(rand(100) , rand(20), 40, enchant.Easing.BOUNCE_EASEOUT)
+						.moveBy(-rand(100), -rand(20), rand(20))
+						.fadeOut(20)
+						.fadeIn(10)
+						.loop();
+				/*
+				//rotate
 				this.on('enterframe' , function(){
 					this.rotate(rand(10));
-				});
+				});				
+				*/
 				core.rootScene.addChild(this);
 			}
 		});
 
 		var bears = [];
-		for(var i = 0; i < 100; i++){
+		for(var i = 0; i < 30; i++){
 			bears[i] = new Bear(rand(320), rand(320));
 		}
 
