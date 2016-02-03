@@ -14,6 +14,27 @@ window.onload = function() {
 	core.fps = 10;
 
 	core.onload = function(){
+		var Bear = Class.create(Sprite,{
+			initialize: function(x,y){
+				Sprite.call(this, 32, 32);
+				this.x = x;
+				this.y = y;
+				this.image = core.assets['game/chara1.png'];
+
+				this.on('enterframe' , function(){
+					this.frame = this.age % 3 ;
+					this.x += 5;
+
+				});
+				core.rootScene.addChild(this);
+			}
+		});
+
+		//class 実行
+		var bear = new Bear(0, 100);
+
+
+		/*
 		var bear = new Sprite(32, 32);
 		bear.image = core.assets['game/chara1.png'];
 		bear.x = 0;
@@ -78,19 +99,19 @@ window.onload = function() {
 		label.y = 5;
 		label.color = 'red'
 		label.font = '14px "Arial"';
-		/*
+
 		label.text = '0';
 		
 		//frame数取得　-> label　書き換え		
 		label.on('enterframe' , function(){
 			label.text = (core.frame / core.fps).toFixed(2);
 		});
+
+		core.rootScene.addChild(bear);
+		core.rootScene.addChild(enemy);
+		core.rootScene.addChild(label);		
 		*/
 
-
-		core.rootScene.addChild(enemy);
-		core.rootScene.addChild(label);
-		core.rootScene.addChild(bear);
 	}
 	core.start();
 };
