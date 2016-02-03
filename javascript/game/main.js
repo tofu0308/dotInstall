@@ -18,9 +18,7 @@ window.onload = function() {
 		bear.image = core.assets['game/chara1.png'];
 		bear.x = 0;
 		bear.y = 0;
-
 		bear.frame = 1;
-
 
 		bear.addEventListener('enterframe' , function(){
 			
@@ -32,6 +30,30 @@ window.onload = function() {
 			if(core.input.right) this.x += 5;
 			if(core.input.up) this.y -= 5;
 			if(core.input.down) this.y += 5;
+
+			//衝突判定
+			// intersect 
+			if(this.intersect(enemy)){
+				//label.text = 'hit!';
+			}
+
+			//within
+			if(this.within(enemy , 10)){
+				label.text = 'HIT!';
+			}
+
+			
+		});
+
+
+		var enemy = new Sprite(32, 32);
+		enemy.image = core.assets['game/chara1.png'];
+		enemy.x = 80;
+		enemy.y = 0;
+		enemy.frame = 5;
+
+		enemy.addEventListener('enterframe' , function(){
+			
 		});
 
 		//touch -> remove
@@ -50,14 +72,17 @@ window.onload = function() {
 		label.y = 5;
 		label.color = 'red'
 		label.font = '14px "Arial"';
+		/*
 		label.text = '0';
 		
-		//frame数取得　-> label　書き換え
+		//frame数取得　-> label　書き換え		
 		label.on('enterframe' , function(){
 			label.text = (core.frame / core.fps).toFixed(2);
 		});
+		*/
 
 
+		core.rootScene.addChild(enemy);
 		core.rootScene.addChild(label);
 		core.rootScene.addChild(bear);
 	}
