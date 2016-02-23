@@ -45,7 +45,6 @@
         $('#main .item').css('color' , 'pink');
         $('#main , .item').css('color' , 'purple');
         $('.item + .item').css('color' , 'yellow');
-
         */
 
         //フィルタ
@@ -56,9 +55,22 @@
         //:first , :last
         /*
         $('#sub > li:gt(0)').css('color' , 'red');
-        */
-        
         $('#sub > li:contains(1)').css('color' , 'red');
+        */
+
+        //メソッドを使ったDOM要素の指定
+        //parent() , children()
+        //next() , prev()
+        //siblings() -兄弟要素指定
+
+        //$('#sub').parent().css('color' , 'red');
+        //$('#sub > li:eq(1)').siblings().css('color' , 'red');
+
+
+        
+        
+
+
 
 
     });
