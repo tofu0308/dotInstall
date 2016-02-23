@@ -21,6 +21,9 @@
 
         </li>
     </ul>
+    <p><a href="http://google.com">google</a></p>
+    <p><a href="http://yahoo.co.jp">yahoo</a></p>
+    <p><a href="http://dotoinstall.com">dotinstall</a></p>
 
 
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -66,12 +69,17 @@
         //$('#sub').parent().css('color' , 'red');
         //$('#sub > li:eq(1)').siblings().css('color' , 'red');
 
+        //属性セレクタ
+        // =
+        // !=
+        // *=
+        // ^=
+        // $=
 
-        
-        
-
-
-
+        //$('a[href="http://google.com"]').css('background' , 'red');
+        //$('a[href != "http://google.com"]').css('background' , 'red');
+        //$('a[href *= "google"]').css('background' , 'red');
+        //$('a[href $= "jp"]').css('background' , 'red');
 
     });
 </script>
