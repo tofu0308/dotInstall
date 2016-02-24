@@ -123,6 +123,15 @@
         $('p').remove();
         */
 
+        //before , after
+        //prepend , append
+
+        var li = $('<li>').text('just added');
+        //$('ul > li:eq(0)').before(li);
+        //li.insertAfter($('ul > li:eq(0)'));
+        //$('ul').prepend(li);
+        li.prependTo($('ul > li:eq(0)'));
+
 
 
 
