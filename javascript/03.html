@@ -154,6 +154,25 @@
         });
 		*/
 
+		//イベント
+		//click
+		//mouseover
+
+		$('#box').click(function(){
+			$(this).css('background','green');
+		});
+
+		$('#box').mouseover(function(){
+			$(this).css('background','purple');
+		});
+
+		$('#box').mouseout(function(){
+			$(this).css('background','red');
+		});
+
+		$('#box').mousemove(function(e){
+			$(this).text(e.pageX);
+		});
 
 
 
