@@ -28,6 +28,12 @@
 	<input type="text" value="test">
 
 	<div id="box" style="width:100px; height:100px; background:gray;"></div>
+	<input type="text" id="name">
+	<select name="mem" id="mem">
+		<option value="">Aさん</option>
+		<option value="">Bさん</option>
+		<option value="">Cさん</option>
+	</select>
 
 <style>
 	.test {
@@ -156,7 +162,7 @@
 
 		//イベント
 		//click
-		//mouseover
+		//mouseover , mouseout , mousemove
 
 		$('#box').click(function(){
 			$(this).css('background','green');
@@ -174,6 +180,20 @@
 			$(this).text(e.pageX);
 		});
 
+		//focus ,blur
+		//change
+
+		$('#name')
+			.focus(function(){
+				$(this).css('background','red');
+			})
+			.blur(function(){
+				$(this).css('background','white');
+			})
+
+		$('#mem').change(function(){
+			alert("chenged.")
+		})
 
 
 
