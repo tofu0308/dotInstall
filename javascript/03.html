@@ -21,9 +21,16 @@
 
         </li>
     </ul>
-    <p><a href="http://google.com">google</a></p>
+    <p><a href="http://google.com" data-sitename="google">google</a></p>
     <p><a href="http://yahoo.co.jp">yahoo</a></p>
     <p><a href="http://dotoinstall.com">dotinstall</a></p>
+
+<style>
+	.test {
+		border: solid red 2px;
+		font-size: 32px;
+	}
+</style>
 
 
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -80,6 +87,26 @@
         //$('a[href != "http://google.com"]').css('background' , 'red');
         //$('a[href *= "google"]').css('background' , 'red');
         //$('a[href $= "jp"]').css('background' , 'red');
+
+        // .cssメソッド 設定　取得
+        //$('p').css('color' , 'red').css('background','blue')
+
+        // addClass
+        //$('p').addClass('test');
+        //$('p').removeClass('test');
+
+        //attr
+        //console.log($('a').attr('href'));
+        //$('a').attr('href' , 'http://dotinstall.com');
+
+        //data
+        console.log($('a').data('sitename'));
+
+
+
+
+
+
 
     });
 </script>
