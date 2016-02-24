@@ -27,11 +27,14 @@
 
 	<input type="text" value="test">
 
+	<div id="box" style="width:100px; height:100px; background:gray;"></div>
+
 <style>
 	.test {
 		border: solid red 2px;
 		font-size: 32px;
 	}
+	#box {margin: 12px;}
 </style>
 
 
@@ -126,11 +129,31 @@
         //before , after
         //prepend , append
 
-        var li = $('<li>').text('just added');
+        //var li = $('<li>').text('just added');
         //$('ul > li:eq(0)').before(li);
         //li.insertAfter($('ul > li:eq(0)'));
         //$('ul').prepend(li);
-        li.prependTo($('ul > li:eq(0)'));
+        //li.prependTo($('ul > li:eq(0)'));
+
+        //hide show
+        //fadeOut fadeIn
+        //toggle
+
+        //$('#box').fadeOut(600);
+        /*
+        $('#box').toggle(600);
+        $('#box').toggle(600);
+        $('#box').toggle(600);
+        $('#box').toggle(600);
+        */
+
+        //callback
+        /*
+        $('#box').fadeOut(600 , function(){
+        	alert("gone!");
+        });
+		*/
+
 
 
 
