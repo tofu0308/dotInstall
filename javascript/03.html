@@ -34,6 +34,10 @@
 		<option value="">Bさん</option>
 		<option value="">Cさん</option>
 	</select>
+	
+	<div>
+		<button>add!</button>
+	</div>
 
 <style>
 	.test {
@@ -184,18 +188,23 @@
 		//change
 
 		$('#name')
-			.focus(function(){
-				$(this).css('background','red');
-			})
-			.blur(function(){
-				$(this).css('background','white');
-			})
+			.focus(function(){$(this).css('background','red');})
+			.blur(function(){$(this).css('background','white');})
 
 		$('#mem').change(function(){
 			alert("chenged.")
+		});
+
+		$('button').click(function(){
+			var p = $('<p>').text('vanish!').addClass('vanish');
+			$(this).before(p);
+		});
+
+		//on
+
+		$('body').on('click', '.vanish' , function(){
+			$(this).remove();
 		})
-
-
 
 
 
