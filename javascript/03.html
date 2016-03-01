@@ -187,6 +187,7 @@
 		//focus ,blur
 		//change
 
+	/*
 		$('#name')
 			.focus(function(){$(this).css('background','red');})
 			.blur(function(){$(this).css('background','white');})
@@ -205,10 +206,20 @@
 		$('body').on('click', '.vanish' , function(){
 			$(this).remove();
 		})
-
-
-
+	*/
     });
+</script>
+
+<button>ajax　test(load)</button>
+<div id="result"></div>
+
+
+<script>
+	$(function(){
+		$('button').click(function(){
+			$('#result').load('01.html');
+		})
+	});
 </script>
 
 </body>
