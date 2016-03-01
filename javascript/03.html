@@ -215,9 +215,14 @@
 
 
 <script>
+	//非同期：　処理が終わる前に次の処理に移る
+
+
 	$(function(){
 		$('button').click(function(){
-			$('#result').load('01.html');
+			$('#result').load('01.html' , function(){
+				$('#domMsg').css('color' , 'purple').css('border', '2px dotted black');
+			});
 		})
 	});
 </script>
