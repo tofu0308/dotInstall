@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+</head>
+<body>
+    <p>jQuery</p>
+
+    <ul id="main">
+        <li class="item">0</li>
+        <li class="item">1</li>
+        <li>2</li>
+        <li>
+            3
+            <ul id="sub">
+                <li>3-0</li>
+                <li>3-1</li>
+                <li class="item">3-2</li>
+            </ul>
+
+        </li>
+    </ul>
+    <p><a href="http://google.com" data-sitename="google">google</a></p>
+    <p><a href="http://yahoo.co.jp">yahoo</a></p>
+    <p><a href="http://dotoinstall.com">dotinstall</a></p>
+
+	<input type="text" value="test">
+
+	<div id="box" style="width:100px; height:100px; background:gray;"></div>
+	<input type="text" id="name">
+	<select name="mem" id="mem">
+		<option value="">Aさん</option>
+		<option value="">Bさん</option>
+		<option value="">Cさん</option>
+	</select>
+	
+	<div>
+		<button>add!</button>
+	</div>
+
+<style>
+	.test {
+		border: solid red 2px;
+		font-size: 32px;
+	}
+	#box {margin: 12px;}
+</style>
+
+
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+    //$(document).ready(function{
+    $(function(){
+        // セレクタ：処理対象となるDOM要素を指定する記法
+        //メソッド：処理
+        
+        // #　. (id,class)
+        // > 直下の要素
+        //　（スペース）それ以下の要素
+        // , 複数の要素
+        //　+　隣接する要素
+
+
+        /*
+        $('p').css('color','#ff0000').hide('slow');       
+        $('#sub').css('color' , 'red');
+        $('.item').css('color' , 'green');
+        $('#main > .item').css('color' , 'red');
+        $('#main .item').css('color' , 'pink');
+        $('#main , .item').css('color' , 'purple');
+        $('.item + .item').css('color' , 'yellow');
+        */
+
+        //フィルタ
+        // :eq()
+        // :gt() , :lt()
+        //:even , :odd
+        //:contains()
+        //:first , :last
+        /*
+        $('#sub > li:gt(0)').css('color' , 'red');
+        $('#sub > li:contains(1)').css('color' , 'red');
+        */
+
+        //メソッドを使ったDOM要素の指定
+        //parent() , children()
+        //next() , prev()
+        //siblings() -兄弟要素指定
+
+        //$('#sub').parent().css('color' , 'red');
+        //$('#sub > li:eq(1)').siblings().css('color' , 'red');
+
+        //属性セレクタ
+        // =
+        // !=
+        // *=
+        // ^=
+        // $=
+
+        //$('a[href="http://google.com"]').css('background' , 'red');
+        //$('a[href != "http://google.com"]').css('background' , 'red');
+        //$('a[href *= "google"]').css('background' , 'red');
+        //$('a[href $= "jp"]').css('background' , 'red');
+
+        // .cssメソッド 設定　取得
+        //$('p').css('color' , 'red').css('background','blue')
+
+        // addClass
+        //$('p').addClass('test');
+        //$('p').removeClass('test');
+
+        //attr
+        //console.log($('a').attr('href'));
+        //$('a').attr('href' , 'http://dotinstall.com');
+
+        //data
+        //console.log($('a').data('sitename'));
+
+        //text
+        //html
+        //val
+        //remove, empty
+
+        /*
+        $('p').text('こちらに変更');
+        console.log($('p').text());
+        $('p').html('<a href="">test</a>');
+        */
+
+        /*
+        console.log($('input').val());
+        $('input').val('aa');
+        $('p').empty();
+        $('p').remove();
+        */
+
+        //before , after
+        //prepend , append
+
+        //var li = $('<li>').text('just added');
+        //$('ul > li:eq(0)').before(li);
+        //li.insertAfter($('ul > li:eq(0)'));
+        //$('ul').prepend(li);
+        //li.prependTo($('ul > li:eq(0)'));
+
+        //hide show
+        //fadeOut fadeIn
+        //toggle
+
+        //$('#box').fadeOut(600);
+        /*
+        $('#box').toggle(600);
+        $('#box').toggle(600);
+        $('#box').toggle(600);
+        $('#box').toggle(600);
+        */
+
+        //callback
+        /*
+        $('#box').fadeOut(600 , function(){
+        	alert("gone!");
+        });
+		*/
+
+		//イベント
+		//click
+		//mouseover , mouseout , mousemove
+
+		$('#box').click(function(){
+			$(this).css('background','green');
+		});
+
+		$('#box').mouseover(function(){
+			$(this).css('background','purple');
+		});
+
+		$('#box').mouseout(function(){
+			$(this).css('background','red');
+		});
+
+		$('#box').mousemove(function(e){
+			$(this).text(e.pageX);
+		});
+
+		//focus ,blur
+		//change
+
+	/*
+		$('#name')
+			.focus(function(){$(this).css('background','red');})
+			.blur(function(){$(this).css('background','white');})
+
+		$('#mem').change(function(){
+			alert("chenged.")
+		});
+
+		$('button').click(function(){
+			var p = $('<p>').text('vanish!').addClass('vanish');
+			$(this).before(p);
+		});
+
+		//on
+
+		$('body').on('click', '.vanish' , function(){
+			$(this).remove();
+		})
+	*/
+    });
+</script>
+
+<button>ajax　test(load)</button>
+<div id="result"></div>
+
+<p>
+	<input type="text" name="name" id="nameGet">
+	<input type="button" id="greet" value="Greet">
+	
+</p>
+
+<script>
+	//非同期処理：　処理が終わる前に次の処理に移る
+	// $.post
+	// $.get
+
+	$(function(){
+		$('button').click(function(){
+			$('#result').load('01.html' , function(){
+				$('#domMsg').css('color' , 'purple').css('border', '2px dotted black');
+			});
+		})
+	});
+
+	$('#greet').click(function(){
+		//03_test.php を読込
+		$.get('03_test.php' , {
+			name: $('#nameGet').val()
+		} , function(data){
+			$('#result').html(data.message + '('+ data.length +')' );
+		})
+
+	});
+</script>
+
+</body>
+</html>
