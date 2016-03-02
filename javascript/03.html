@@ -213,10 +213,16 @@
 <button>ajax　test(load)</button>
 <div id="result"></div>
 
+<p>
+	<input type="text" name="name" id="nameGet">
+	<input type="button" id="greet" value="Greet">
+	
+</p>
 
 <script>
-	//非同期：　処理が終わる前に次の処理に移る
-
+	//非同期処理：　処理が終わる前に次の処理に移る
+	// $.post
+	// $.get
 
 	$(function(){
 		$('button').click(function(){
@@ -224,6 +230,16 @@
 				$('#domMsg').css('color' , 'purple').css('border', '2px dotted black');
 			});
 		})
+	});
+
+	$('#greet').click(function(){
+		//03_test.php を読込
+		$.get('03_test.php' , {
+			name: $('#nameGet').val()
+		} , function(data){
+			$('#result').html(data.message + '('+ data.length +')' );
+		})
+
 	});
 </script>
 
