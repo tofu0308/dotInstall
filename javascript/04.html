@@ -3,12 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>jQuery</title>
+
+<style>
+	#thumb .thumbImg {
+		width: 25%;
+	}
+</style>
+
 </head>
 <body>
+	<div id="thumb"></div>
 
 
 <!-- jQuery -->
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script>
+	$(function(){
+		var files = [
+			'../img/01.jpg',
+			'../img/02.jpg',
+			'../img/03.jpg',
+			'../img/04.jpg'
+		];
+		var img;
+		//配列内の指定ファイル数だけloop
+		for( var i = 0; i < files.length; i++) {
+			img = $('<img>').attr('src' , files[i]).addClass('thumbImg');
+			
+			$('#thumb').append(img);
+
+
+		}
+	});
+</script>
 
 </body>
 </html>
