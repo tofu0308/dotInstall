@@ -5,14 +5,42 @@
     <title>jQuery</title>
 
 <style>
-	#thumb .thumbImg {
-		width: 25%;
+	body {
+		margin: 10px auto;
+	}
+
+	#main {
+		margin: 24px auto;
+		width: 800px;
+		text-align: center;
+	}
+
+	#main img {
+		max-width: 640px;
+	}	
+
+	#thumb{
+		width: 664px;
+		margin: 0 auto;
+	}
+
+	
+
+	.thumbImg {
+		max-width: 160px;
+		max-height: 120px;
+		margin-right: 8px;
+	}
+
+	.thumbImg:nth-child(4n+4) {
+		margin-right: 0;
 	}
 </style>
 
 </head>
 <body>
 	<div id="thumb"></div>
+	<div id="main"></div>
 
 
 <!-- jQuery -->
@@ -31,11 +59,21 @@
 			img = $('<img>').attr('src' , files[i]).addClass('thumbImg');
 			
 			$('#thumb').append(img);
-
-
 		}
+
+		$('#main').append(
+			$('<img>').attr('src' , files[0])
+		);
+
+		//サムネクリック
+		$('.thumbImg').click(function(){
+			//mainのimg　srcにクリックされたサムネのattributeをセット
+			$('#main img').attr('src' , $(this).attr('src'));
+		})
+
 	});
 </script>
 
 </body>
 </html>
+
