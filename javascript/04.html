@@ -77,6 +77,7 @@
 		$('.thumbImg').click(function(){
 			//mainのimg　srcにクリックされたサムネのattributeをセット
 			$('#main img').attr('src' , $(this).attr('src'));
+			currentNum = $(this).index();
 		})
 
 		//prev
