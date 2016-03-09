@@ -22,9 +22,7 @@
 	#thumb{
 		width: 664px;
 		margin: 0 auto;
-	}
-
-	
+	}	
 
 	.thumbImg {
 		max-width: 160px;
@@ -35,12 +33,21 @@
 	.thumbImg:nth-child(4n+4) {
 		margin-right: 0;
 	}
+
+	#nav {
+		text-align: center;
+	}
 </style>
 
 </head>
 <body>
 	<div id="thumb"></div>
 	<div id="main"></div>
+	<div id="nav">
+		<button id="prev">&laquo; prev</button>
+		<button id="next">next &raquo;</button>
+	</div>
+
 
 
 <!-- jQuery -->
@@ -54,6 +61,7 @@
 			'../img/04.jpg'
 		];
 		var img;
+		var currentNum = 0;
 		//配列内の指定ファイル数だけloop
 		for( var i = 0; i < files.length; i++) {
 			img = $('<img>').attr('src' , files[i]).addClass('thumbImg');
@@ -71,6 +79,26 @@
 			$('#main img').attr('src' , $(this).attr('src'));
 		})
 
+		//prev
+		$('#prev').click(function(){
+			currentNum--;
+			if(currentNum < 0){
+				// マイナスになる場合は最大値（配列の最後尾）を適用
+				currentNum = files.length -1;
+			}
+
+			$('#main img').attr('src' , files[currentNum]);
+		});
+
+		//next
+		$('#next').click(function(){
+			currentNum++;
+			if(currentNum > files.length -1){
+				// 配列の最後尾の場合は先頭に戻る
+				currentNum = 0;
+			}
+			$('#main img').attr('src' , files[currentNum]);
+		});
 	});
 </script>
 
