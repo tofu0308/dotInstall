@@ -28,6 +28,12 @@
 		max-width: 160px;
 		max-height: 120px;
 		margin-right: 8px;
+		opacity: 0.2;
+		cursor: pointer;
+	}
+
+	.current {
+		opacity: 1.0;
 	}
 
 	.thumbImg:nth-child(4n+4) {
@@ -73,11 +79,15 @@
 			$('<img>').attr('src' , files[0])
 		);
 
+		//初期表示画像のサムネにclass追加
+		$('.thumbImg:first').addClass('current');
+
 		//サムネクリック
 		$('.thumbImg').click(function(){
 			//mainのimg　srcにクリックされたサムネのattributeをセット
 			$('#main img').attr('src' , $(this).attr('src'));
 			currentNum = $(this).index();
+			$(this).addClass('current').siblings().removeClass('current');
 		})
 
 		//prev
@@ -89,6 +99,8 @@
 			}
 
 			$('#main img').attr('src' , files[currentNum]);
+			$('.thumbImg').removeClass('current');
+			$('.thumbImg').eq(currentNum).addClass('current')
 		});
 
 		//next
@@ -99,6 +111,8 @@
 				currentNum = 0;
 			}
 			$('#main img').attr('src' , files[currentNum]);
+			$('.thumbImg').removeClass('current');
+			$('.thumbImg').eq(currentNum).addClass('current')
 		});
 	});
 </script>
