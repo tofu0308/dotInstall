@@ -68,9 +68,18 @@
 			'../img/03.jpg',
 			'../img/04.jpg'
 		];
+
+		//imgを代入する変数
 		var img;
+		
+		//自動再生用
 		var timer;
+		//自動再生をしているかどうか
+		var nowplaying = false;
+		
+		//現在の画像
 		var currentNum = 0;
+
 		//配列内の指定ファイル数だけloop
 		for( var i = 0; i < files.length; i++) {
 			img = $('<img>').attr('src' , files[i]).addClass('thumbImg');
@@ -128,11 +137,14 @@
 
 		//clickイベント
 		$('#play').click(function(){
+			if(nowplaying === true) return;
+			nowplaying = true;
 			autoPlay();
 		});
 
 		$('#stop').click(function(){
 			clearTimeout(timer);
+			nowplaying = false;
 		});
 
 
