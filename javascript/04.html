@@ -6,9 +6,17 @@
 
 <style>
 	body {
-		margin: 10px auto;
+		display: table;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
 	}
 
+	#contents {
+		display: table-cell;
+		vertical-align: middle;
+	}
 	#main {
 		margin: 24px auto;
 		width: 800px;
@@ -21,13 +29,13 @@
 
 	#thumb{
 		width: 664px;
-		margin: 0 auto;
+		margin: 120px auto 24px;
 	}	
 
 	.thumbImg {
 		max-width: 160px;
 		max-height: 120px;
-		margin-right: 8px;
+		margin: 0 8px 8px 0;
 		opacity: 0.2;
 		cursor: pointer;
 	}
@@ -42,18 +50,119 @@
 
 	#nav {
 		text-align: center;
+		height: 100px;
 	}
+
+	#nav button {
+		position: relative;
+		width: 64px;
+		height: 64px;
+		margin: 0 16px;
+		border-radius: 32px;
+		border:4px solid #49a9d4;
+		background:inherit;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+
+	#nav button:hover {
+		background: #49a9d4;
+		transition: all .6s;
+	}
+
+	#nav button:hover:before{
+		transition: all .6s;	
+	}
+
+	#nav button:before{
+		position: absolute;
+		width: 18px;
+		height: 18px;
+		content: "";
+	}
+
+	#nav button#prev:before{
+		left: 20px;
+		top: 16px;
+		border-top: 6px solid #49a9d4;
+		border-right: 6px solid #49a9d4;
+		transform: rotate(-135deg);
+	}
+
+	#nav button#next:before{
+		left: 12px;
+		top: 16px;
+		border-top: 6px solid #49a9d4;
+		border-right: 6px solid #49a9d4;
+		transform: rotate(45deg);
+	}
+
+	#nav button#prev:hover:before,
+	#nav button#next:hover:before{
+		border-top: 6px solid #fff;
+		border-right: 6px solid #fff;
+	}
+
+	#nav button#play:before{
+		left: 20px;
+		top: 10px;
+		height: 0;
+		width: 0;		
+		border-top: 18px solid transparent;
+		border-bottom: 18px solid transparent;
+		border-left: 26px solid #49a9d4;		
+	}
+
+	#nav button#play:hover:before{
+		border-top: 18px solid transparent;
+		border-bottom: 18px solid transparent;
+		border-left: 26px solid #fff;
+	}
+
+
+	#nav button#play:hover{
+
+	}
+
+	#nav button#stop{
+		border:4px solid #dcdcdc;
+	}
+
+	#nav button#stop:hover {
+		background: inherit;
+		cursor: default;
+	}
+
+	#nav button#stop:before{
+		left: 14px;
+		top: 14px;
+		border: 6px solid #dcdcdc;
+		background: #dcdcdc;
+	}
+
+	#nav button span {
+		display: none;
+	}
+
+
+
+
+	
+
 </style>
 
 </head>
 <body>
-	<div id="thumb"></div>
-	<div id="main"></div>
-	<div id="nav">
-		<button id="prev">&laquo; prev</button>
-		<button id="next">next &raquo;</button>
-		<button id="play">再生</button>
-		<button id="stop">停止</button>
+	<div id="contents">
+		<div id="thumb"></div>
+		<div id="main"></div>
+		<div id="nav">
+			<button id="prev"><span>&laquo; prev</span></button>
+			<button id="next"><span>next &raquo;</span></button>
+			<button id="play"><span>再生</span></button>
+			<button id="stop"><span>停止</span></button>
+		</div>
 	</div>
 
 
