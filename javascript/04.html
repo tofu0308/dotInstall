@@ -52,6 +52,8 @@
 	<div id="nav">
 		<button id="prev">&laquo; prev</button>
 		<button id="next">next &raquo;</button>
+		<button id="play">再生</button>
+		<button id="stop">停止</button>
 	</div>
 
 
@@ -67,6 +69,7 @@
 			'../img/04.jpg'
 		];
 		var img;
+		var timer;
 		var currentNum = 0;
 		//配列内の指定ファイル数だけloop
 		for( var i = 0; i < files.length; i++) {
@@ -114,9 +117,30 @@
 			$('.thumbImg').removeClass('current');
 			$('.thumbImg').eq(currentNum).addClass('current')
 		});
+
+		//auto play動作
+		function autoPlay(){
+			$('#next').click();
+			timer = setTimeout(function(){
+				autoPlay();
+				console.log(currentNum);
+			},3000);
+		}
+
+		//clickイベント
+		$('#play').click(function(){
+			autoPlay();
+		});
+
+		$('#stop').click(function(){
+			clearTimeout(timer);
+		});
+
+
 	});
 </script>
 
 </body>
 </html>
+
 
