@@ -11,6 +11,11 @@
 	height: 160px;
 }
 
+.warning{
+	color:#ff0000;
+	font-weight: bold;
+}
+
 </style>
 
 </head>
@@ -36,6 +41,11 @@
 	memo.addEventListener('keyup' , function(){
 		var remaining = LIMIT - this.value.length;
 		count.innerHTML = remaining;
+		if(remaining <= 10){
+			count.className = 'warning';
+		}else{
+			count.className = '';
+		}
 	});
 
 
