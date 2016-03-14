@@ -24,9 +24,11 @@
 	<textarea id="memo"></textarea>
 	<div id="count"></div>
 
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>
 	(function(){
-
+		/*
 		//最大文字数
 		var LIMIT = 30;
 
@@ -45,8 +47,8 @@
 			var remaining = LIMIT - textarea.value.length;
 			count.innerHTML = remaining;
 			
-			//remaining（残り文字数が10以下かどうか）
-			if(remaining <= 10){
+			//remaining（残り文字数がWARNING(10)以下かどうか）
+			if(remaining <= WARNING){
 				count.className = 'warning';
 			}else{
 				count.className = '';
@@ -65,8 +67,35 @@
 				countChars(this);
 			});
 		}
+		*/
 
+		//ｊQueryに書き換え
+		var LIMIT = 30;
+		var WARNING = 10;
+		var count = $('#count')
+
+		count.text(LIMIT);
+		
+
+		function countChars(textarea){
+			var remaining = LIMIT - textarea.val().length;
+			count.text(remaining);
+			
+			if(remaining <= WARNING){
+				count.addClass('warning');
+			}else{
+				count.removeClass('warning');
+			}
+		}
+
+		$('#memo').keyup(function(){
+			countChars($(this));
+		});
 	})();
+
+
+
+
 	
 
 
