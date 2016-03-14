@@ -75,10 +75,19 @@
 		var count = $('#count')
 
 		count.text(LIMIT);
-		
+
+		//0未満にしたくないのでmaxlengthを挿入
+		$('textarea#memo').attr('maxlength', LIMIT);
+
 
 		function countChars(textarea){
 			var remaining = LIMIT - textarea.val().length;
+			
+			//remainingが0未満になるとき0を代入
+			if(remaining < 0){
+				var remaining = 0;
+			}
+
 			count.text(remaining);
 			
 			if(remaining <= WARNING){
