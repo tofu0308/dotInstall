@@ -19,7 +19,27 @@
 	<textarea id="memo"></textarea>
 	<div id="count"></div>
 
+<script>
+	//最大文字数
+	var LIMIT = 30;
 
+	//警告開始文字数
+	var WARNING = 10;
+
+	// memo,count関数化
+	var memo = document.getElementById('memo');
+	var count = document.getElementById('count');
+
+	//countに現在の文字数（初期数値）を格納
+	count.innerHTML = LIMIT;
+
+	memo.addEventListener('keyup' , function(){
+		var remaining = LIMIT - this.value.length;
+		count.innerHTML = remaining;
+	});
+
+
+</script>
 
 </body>
 </html>
