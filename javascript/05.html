@@ -40,10 +40,9 @@
 		//countに現在の文字数（初期数値）を格納
 		count.innerHTML = LIMIT;
 
-		//イベント追加
-		memo.addEventListener('keyup' , function(){
-			//keyup時に残り文字数を計算
-			var remaining = LIMIT - this.value.length;
+		function countChars(textarea){
+			//残り文字数を計算
+			var remaining = LIMIT - textarea.value.length;
 			count.innerHTML = remaining;
 			
 			//remaining（残り文字数が10以下かどうか）
@@ -52,8 +51,20 @@
 			}else{
 				count.className = '';
 			}
-		});
+		}
 
+		if(memo.attachEvent){
+			//　＞　IE8
+			memo.attachEvent('onkeyup' , function(e){
+				countChars(e.srcElement);
+			});
+		}else{
+			//その他のブラウザ
+			//イベント追加
+			memo.addEventListener('keyup' , function(){
+				countChars(this);
+			});
+		}
 
 	})();
 	
