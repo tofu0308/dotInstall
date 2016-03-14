@@ -25,28 +25,39 @@
 	<div id="count"></div>
 
 <script>
-	//最大文字数
-	var LIMIT = 30;
+	(function(){
 
-	//警告開始文字数
-	var WARNING = 10;
+		//最大文字数
+		var LIMIT = 30;
 
-	// memo,count関数化
-	var memo = document.getElementById('memo');
-	var count = document.getElementById('count');
+		//警告開始文字数
+		var WARNING = 10;
 
-	//countに現在の文字数（初期数値）を格納
-	count.innerHTML = LIMIT;
+		// memo,count関数化
+		var memo = document.getElementById('memo');
+		var count = document.getElementById('count');
 
-	memo.addEventListener('keyup' , function(){
-		var remaining = LIMIT - this.value.length;
-		count.innerHTML = remaining;
-		if(remaining <= 10){
-			count.className = 'warning';
-		}else{
-			count.className = '';
-		}
-	});
+		//countに現在の文字数（初期数値）を格納
+		count.innerHTML = LIMIT;
+
+		//イベント追加
+		memo.addEventListener('keyup' , function(){
+			//keyup時に残り文字数を計算
+			var remaining = LIMIT - this.value.length;
+			count.innerHTML = remaining;
+			
+			//remaining（残り文字数が10以下かどうか）
+			if(remaining <= 10){
+				count.className = 'warning';
+			}else{
+				count.className = '';
+			}
+		});
+
+
+	})();
+	
+
 
 
 </script>
