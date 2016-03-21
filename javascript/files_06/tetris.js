@@ -24,3 +24,21 @@ var shapes = [
 
 //block colors
 var colors = ['cyan','orange','blue','yellow','red','green','purple'];
+
+function newGame(){
+	//timer clear
+	clearInterval(interval);
+
+	//盤面初期化
+	init();
+
+	//操作ブロックをセット
+	newShape()
+
+	//ゲームオーバーフラグタオス
+	lose = false;
+
+	//250ms毎に関数tickを呼び出し
+	interval = setInterVal(tick, 250);
+
+}
