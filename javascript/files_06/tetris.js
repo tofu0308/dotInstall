@@ -30,11 +30,10 @@ function init(){
 	for (var y = 0; y < ROWS; ++y) {
 		board[y]=[];
 
-		for (var y = 0; y < ROWS; ++y) {
-			board[y]=[];
-			
-		};
-	};
+		for (var x = 0; x < ROWS; ++x) {
+			board[y][x]=0;			
+		}
+	}
 }
 
 
