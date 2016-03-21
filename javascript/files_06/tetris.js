@@ -25,6 +25,21 @@ var shapes = [
 //block colors
 var colors = ['cyan','orange','blue','yellow','red','green','purple'];
 
+//盤面初期化関数
+function init(){
+	for (var y = 0; y < ROWS; ++y) {
+		board[y]=[];
+
+		for (var y = 0; y < ROWS; ++y) {
+			board[y]=[];
+			
+		};
+	};
+}
+
+
+
+//ページ読み込み時
 function newGame(){
 	//timer clear
 	clearInterval(interval);
@@ -42,3 +57,4 @@ function newGame(){
 	interval = setInterVal(tick, 250);
 
 }
+newGame();
