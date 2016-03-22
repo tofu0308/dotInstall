@@ -60,6 +60,27 @@ function newShape(){
 	currentY = 0;
 }
 
+function tick(){
+	//降下
+	if(valid(0,1)){
+		++currentY;
+	}else{
+		//着地時の処理
+		//ブロック固定
+		freeze();
+		//ライン消去
+		clearLines();
+
+		//ゲームオーバー条件
+		if(lose){
+			//newGame();
+			return false;
+		}
+
+		//新しいブロック
+		newShape();
+	}
+}
 
 
 
