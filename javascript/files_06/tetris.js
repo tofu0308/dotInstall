@@ -82,6 +82,35 @@ function tick(){
 	}
 }
 
+function valid(offsetX, offsetY, newCurrent){
+	offsetX = offsetX || 0;
+	offsetY = offsetY || 0;
+	offsetX = offsetX + offsetX;
+	offsetY = offsetY + offsetY;
+	newCurrent = newCurrent || current;
+
+	for (var y = 0; y < 4; ++y) {
+		for (var x = 0; x < 4; ++x) {
+			if(newCurrent[y][x]){
+				if(typeof board[y + offsetY] == 'undefind'
+					|| typeof board[y + offsetY][x + offsetX]
+					|| x + offsetX < 0
+					|| y + offsetY >=  ROWS
+					|| x + offsetX >= COLS ){
+						if(offsetY == 1 && offsetX - currentX == 0 && offsetY - currentY == 1){
+							alert("game over");
+
+							//ゲームーバーフラグ
+							lose = true;
+					}
+				return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
 
 
 
