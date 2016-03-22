@@ -39,7 +39,7 @@ function init(){
 //操作ブロックをセット
 function newShape(){
 	//仕様ブロックをパターンから抽出
-	var id = Math.floor(Math.rondom() * shapes.length);
+	var id = Math.floor(Math.random() * shapes.length);
 	var shape = shapes[id];
 
 	current = [];
@@ -62,6 +62,8 @@ function newShape(){
 
 
 
+
+
 //ページ読み込み時
 function newGame(){
 	//timer clear
@@ -77,7 +79,7 @@ function newGame(){
 	lose = false;
 
 	//250ms毎に関数tickを呼び出し
-	interval = setInterVal(tick, 250);
+	interval = setInterval(tick, 250);
 
 }
 newGame();
