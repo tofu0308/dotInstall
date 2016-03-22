@@ -82,6 +82,7 @@ function tick(){
 	}
 }
 
+//ブロックの移動可否
 function valid(offsetX, offsetY, newCurrent){
 	offsetX = offsetX || 0;
 	offsetY = offsetY || 0;
@@ -100,7 +101,7 @@ function valid(offsetX, offsetY, newCurrent){
 						if(offsetY == 1 && offsetX - currentX == 0 && offsetY - currentY == 1){
 							alert("game over");
 
-							//ゲームーバーフラグ
+							//ゲームオーバーフラグ
 							lose = true;
 					}
 				return false;
