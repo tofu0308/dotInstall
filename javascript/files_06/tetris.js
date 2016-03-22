@@ -36,6 +36,30 @@ function init(){
 	}
 }
 
+//操作ブロックをセット
+function newShape(){
+	//仕様ブロックをパターンから抽出
+	var id = Math.floor(Math.rondom() * shapes.length);
+	var shape = shapes[id];
+
+	current = [];
+	for (var y = 0; y < 4; ++y) {
+		current[y] =[];
+		for (var x = 0; x < 4; ++x) {
+			var i = 4 * y + x;
+			if (typeof shape[i] != 'undefind' && shape[i]) {
+				current[y][x] = id +1;
+			}else{
+				current[y][x] = 0;
+			}
+		}
+	}
+
+	//盤面丈夫にセット
+	currentX = 5;
+	currentY = 0;
+}
+
 
 
 //ページ読み込み時
