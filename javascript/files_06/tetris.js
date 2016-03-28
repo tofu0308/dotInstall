@@ -73,7 +73,7 @@ function tick(){
 
 		//ゲームオーバー条件
 		if(lose){
-			//newGame();
+			newGame();
 			return false;
 		}
 
@@ -114,8 +114,8 @@ function valid(offsetX, offsetY, newCurrent){
 
 //操作ブロックを盤面にセット
 function freeze(){
-	for (var y = 0; y < 4; y) {
-		for (var x = 0; x < x.length; x++) {
+	for (var y = 0; y < 4; ++y) {
+		for (var x = 0; x < x.length; ++x) {
 			if(current[y][x]) {
 				board[y + currentY ][x + currentX ] = current[y][x];
 			}			
@@ -136,7 +136,7 @@ function clearLines(){
 
 		//揃っていたらその行を消す
 		if(rowFailed){
-			for( var yy = y; yy > 0 --yy){
+			for( var yy = y; yy > 0; --yy){
 				for (var x = 0; x < COLS; ++x) {
 					bord[yy][x] = bord[yy-1][x];
 
