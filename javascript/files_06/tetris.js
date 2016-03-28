@@ -123,6 +123,30 @@ function freeze(){
 	}
 }
 
+// 一行が揃っているか調べる
+function clearLines(){
+	for (var y = ROWS - 1; y >= 0; --y) {
+		var rowFailed = true;
+		for (var x = 0; x < COLS; ++x) {
+			if(board[x][y] == 0 ){
+				rowFailed = false;
+				break;
+			}			
+		}		
+
+		//揃っていたらその行を消す
+		if(rowFailed){
+			for( var yy = y; yy > 0 --yy){
+				for (var x = 0; x < COLS; ++x) {
+					bord[yy][x] = bord[yy-1][x];
+
+				}
+			}
+			++y;
+		}
+	}
+}
+
 
 
 
