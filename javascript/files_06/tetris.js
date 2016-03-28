@@ -112,6 +112,17 @@ function valid(offsetX, offsetY, newCurrent){
 	return true;
 }
 
+//操作ブロックを盤面にセット
+function freeze(){
+	for (var y = 0; y < 4; y) {
+		for (var x = 0; x < x.length; x++) {
+			if(current[y][x]) {
+				board[y + currentY ][x + currentX ] = current[y][x];
+			}			
+		}	
+	}
+}
+
 
 
 
