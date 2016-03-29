@@ -1,5 +1,5 @@
 /*キーボード入力時の処理*/
-document.body.onkeydown = function( e ) {
+document.body.onkeydown = function(e) {
   // キーに名前をセット
 	var keys = {
 		37: 'left',

@@ -26,12 +26,11 @@ var shapes = [
 var colors = ['cyan','orange','blue','yellow','red','green','purple'];
 
 //盤面初期化関数
-function init(){
-	for (var y = 0; y < ROWS; ++y) {
-		board[y]=[];
-
-		for (var x = 0; x < ROWS; ++x) {
-			board[y][x]=0;			
+function init() {
+	for ( var y = 0; y < ROWS; ++y ) {
+	board[ y ] = [];
+		for ( var x = 0; x < COLS; ++x ) {
+			board[ y ][ x ] = 0;
 		}
 	}
 }
@@ -86,25 +85,26 @@ function tick(){
 function valid(offsetX, offsetY, newCurrent){
 	offsetX = offsetX || 0;
 	offsetY = offsetY || 0;
-	offsetX = offsetX + offsetX;
-	offsetY = offsetY + offsetY;
+	offsetX = currentX + offsetX;
+	offsetY = currentY + offsetY;
 	newCurrent = newCurrent || current;
 
 	for (var y = 0; y < 4; ++y) {
 		for (var x = 0; x < 4; ++x) {
 			if(newCurrent[y][x]){
-				if(typeof board[y + offsetY] == 'undefind'
-					|| typeof board[y + offsetY][x + offsetX]
+				if(typeof board[y + offsetY] == 'undefined'
+					|| typeof board[ y + offsetY ][ x + offsetX ] == 'undefined'
+					|| board[ y + offsetY ][ x + offsetX ]
 					|| x + offsetX < 0
-					|| y + offsetY >=  ROWS
+					|| y + offsetY >= ROWS
 					|| x + offsetX >= COLS ){
 						if(offsetY == 1 && offsetX - currentX == 0 && offsetY - currentY == 1){
 							alert("game over");
 
 							//ゲームオーバーフラグ
 							lose = true;
-					}
-				return false;
+						}
+					return false;
 				}
 			}
 		}
@@ -115,7 +115,7 @@ function valid(offsetX, offsetY, newCurrent){
 //操作ブロックを盤面にセット
 function freeze(){
 	for (var y = 0; y < 4; ++y) {
-		for (var x = 0; x < x.length; ++x) {
+		for (var x = 0; x < 4; ++x) {
 			if(current[y][x]) {
 				board[y + currentY ][x + currentX ] = current[y][x];
 			}			
@@ -126,19 +126,19 @@ function freeze(){
 // 一行が揃っているか調べる
 function clearLines(){
 	for (var y = ROWS - 1; y >= 0; --y) {
-		var rowFailed = true;
+		var rowFilled = true;
 		for (var x = 0; x < COLS; ++x) {
-			if(board[x][y] == 0 ){
-				rowFailed = false;
+			if(board[y][x] == 0 ){
+				rowFilled = false;
 				break;
 			}			
 		}		
 
 		//揃っていたらその行を消す
-		if(rowFailed){
+		if(rowFilled){
 			for( var yy = y; yy > 0; --yy){
 				for (var x = 0; x < COLS; ++x) {
-					bord[yy][x] = bord[yy-1][x];
+					board[yy][x] = board[yy-1][x];
 
 				}
 			}
@@ -159,7 +159,7 @@ function newGame(){
 	init();
 
 	//操作ブロックをセット
-	newShape()
+	newShape();
 
 	//ゲームオーバーフラグタオス
 	lose = false;
