@@ -45,21 +45,33 @@ function draw(){
 	//var g = ctx.createLinearGradient(0,0,100,100);
 
 	//円形グラデーション
+	/*
 	var g = ctx.createRadialGradient(50,50,20,50,50,60);
 	
 	g.addColorStop(0.0,"red");
 	g.addColorStop(0.5,"purple");
 	g.addColorStop(1.0,"yellow");
 	ctx.fillStyle = g;
+	*/
 
 	
 	//shadow
+	/*
 	ctx.shadowColor = "#ccc";
 	ctx.shadowOffsetX = 5;
 	ctx.shadowOffsetY = 5;
 	ctx.shadowBlur = 2;
+	*/
 
+	//alpha
+	/*
 	ctx.globalAlpha = 0.5;
+	*/
+
+	//変形
+	ctx.scale(0.8,0.8);
+	ctx.rotate(30/180*Math.PI);
+	ctx.translate(100,10);
 
 	ctx.fillRect(0,0,100,100);
 
