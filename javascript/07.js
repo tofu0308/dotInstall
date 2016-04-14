@@ -52,5 +52,16 @@ function draw(){
 	g.addColorStop(1.0,"yellow");
 	ctx.fillStyle = g;
 
+	
+	//shadow
+	ctx.shadowColor = "#ccc";
+	ctx.shadowOffsetX = 5;
+	ctx.shadowOffsetY = 5;
+	ctx.shadowBlur = 2;
+
+	ctx.globalAlpha = 0.5;
+
 	ctx.fillRect(0,0,100,100);
+
 }
+
