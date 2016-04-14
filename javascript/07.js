@@ -78,13 +78,39 @@ function draw(){
 	*/
 
 	//線
+	/*
 	ctx.beginPath();
 	ctx.moveTo(20,20);
 	ctx.lineTo(120,20);
 	ctx.lineTo(120,120);
 	ctx.closePath();
 	ctx.fill();
+	*/
 	//ctx.stroke();
+
+	//曲線
+	/*
+	ctx.beginPath();
+	ctx.arc(100,100,50,10/180*Math.PI,210/180*Math.PI);
+	ctx.stroke();
+	*/
+
+	//円
+	/*
+	ctx.beginPath();
+	ctx.arc(100,100,50,0/180*Math.PI,360/180*Math.PI);
+	ctx.stroke();
+	*/
+
+	ctx.beginPath();
+	ctx.arc(100,100,50,10/180*Math.PI,280/180*Math.PI);
+	ctx.lineWidth = 15;
+	
+	//round butt square
+	ctx.lineCap ="round";
+	ctx.stroke();
+
+
 
 
 
