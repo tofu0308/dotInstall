@@ -20,10 +20,10 @@ function draw(){
 	*/
 
 	//線の色
-	ctx.strokeStyle = "rgba(255,0,0,0.5)";
+	//ctx.strokeStyle = "rgba(255,0,0,0.5)";
 	
 	//線の幅（太さ）
-	ctx.lineWidth = 15;
+	//ctx.lineWidth = 15;
 	
 	//角の設定
 	//round　角丸
@@ -69,11 +69,26 @@ function draw(){
 	*/
 
 	//変形
+	/*
 	ctx.scale(0.8,0.8);
 	ctx.rotate(30/180*Math.PI);
 	ctx.translate(100,10);
 
 	ctx.fillRect(0,0,100,100);
+	*/
+
+	//線
+	ctx.beginPath();
+	ctx.moveTo(20,20);
+	ctx.lineTo(120,20);
+	ctx.lineTo(120,120);
+	ctx.closePath();
+	ctx.fill();
+	//ctx.stroke();
+
+
+
+
 
 }
 
