@@ -113,12 +113,23 @@ function draw(){
 	*/
 
 	//text描画
+	/*
 	ctx.font = "bold 20px Verdana";
 	ctx.textAlign="left"; //right center start end
 	ctx.fillStyle='red';
-
+	
 	ctx.fillText('dotInstall', 20 ,20,200);
 	ctx.strokeText('dotInstall', 20 ,120,200);	
+	*/
+
+	//画像
+	var img = new Image();
+	img.src='../img/01.jpg';
+	img.onload=function(){
+		ctx.drawImage(img,10,10);
+	}
+
+
 
 
 
