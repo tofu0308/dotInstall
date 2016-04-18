@@ -102,6 +102,7 @@ function draw(){
 	ctx.stroke();
 	*/
 
+	/*
 	ctx.beginPath();
 	ctx.arc(100,100,50,10/180*Math.PI,280/180*Math.PI);
 	ctx.lineWidth = 15;
@@ -109,6 +110,15 @@ function draw(){
 	//round butt square
 	ctx.lineCap ="round";
 	ctx.stroke();
+	*/
+
+	//text描画
+	ctx.font = "bold 20px Verdana";
+	ctx.textAlign="left"; //right center start end
+	ctx.fillStyle='red';
+
+	ctx.fillText('dotInstall', 20 ,20,200);
+	ctx.strokeText('dotInstall', 20 ,120,200);	
 
 
 
@@ -117,4 +127,5 @@ function draw(){
 
 
 }
+
 
