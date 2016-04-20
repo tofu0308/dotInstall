@@ -124,9 +124,12 @@ function draw(){
 
 	//画像
 	var img = new Image();
-	img.src='../img/01.jpg';
+	img.src='../img/icon_01.jpg';
 	img.onload=function(){
-		ctx.drawImage(img,10,10);
+		//ctx.drawImage(img,10,10);
+		var pattern = ctx.createPattern(img,'repeat'); //no-repeat repeat-x repeat-y
+		ctx.fillStyle = pattern;
+		ctx.fillRect(20,20,100,100);
 	}
 
 
