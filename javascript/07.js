@@ -123,6 +123,7 @@ function draw(){
 	*/
 
 	//画像
+	/*
 	var img = new Image();
 	img.src='../img/icon_01.jpg';
 	img.onload=function(){
@@ -131,14 +132,18 @@ function draw(){
 		ctx.fillStyle = pattern;
 		ctx.fillRect(20,20,100,100);
 	}
+	*/
 
+	ctx.fillStyle = "yellow";
+	ctx.save();
 
+	ctx.fillRect(0,0,50,50);
 
+	ctx.fillStyle = "blue";
+	ctx.fillRect(100,0,50,50);
 
-
-
-
-
+	ctx.restore();
+	ctx.fillRect(200,0,50,50);
 
 }
 
