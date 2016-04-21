@@ -5,7 +5,7 @@
 	<title>ineteractive art</title>
 </head>
 <body>
-	<canvas id="myCanvas" width="600" height="400">
+	<canvas id="myCanvas" width="480" height="320">
 		Canvas非対応
 	</canvas>
 
@@ -13,7 +13,42 @@
 	<script>
 	(function(){
 		'use strict';
-	})
+
+		//canvasの設定
+		var canvas;
+		var ctx;
+
+		var Ball;
+
+		canvas = document.getElementById('myCanvas');
+		if(!canvas || !canvas.getContext) return false;
+		ctx = canvas.getContext('2d');
+
+		function rand(min, max){
+			//0-nのランダムな整数を返す（今回はmin-maxの範囲で）
+			//Math.floor(Math.random()*(n + 1))
+			return min + Math.floor(Math.random() * (max - min + 1));
+		}
+
+		Ball = function(x, y, r){
+			this.x = x;
+			this.y = y;
+			this.r = r;
+			this.color = 'hsla(120, 80%, 40%, 0.8)';
+			this.draw = function(){
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+				ctx.fillStyle = this.color;
+				ctx.closePath();
+				ctx.fill();
+			};
+		};
+
+		var ball = new Ball(rand(100,200), rand(100,200), rand(100,200));
+		ball.draw();
+
+	})();
+
 
 	</script>
 
