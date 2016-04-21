@@ -149,6 +149,7 @@ function draw(){
 	*/
 
 	//ランダム生成
+	/*
 	ctx.globalAlpha = 0.5;
 	for (var i = 0; i < 100; i++) {
 		var x = Math.floor(Math.random()*400);
@@ -166,8 +167,28 @@ function draw(){
 	function rgb(){
 		return Math.floor(Math.random() *255);
 	}
+	*/
 
+	//animation
+	ctx.fillStyle = "#666";
+	var y=0;
+
+	(function loop(){
+		//初期化
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+
+		if(y > canvas.height) y = -120;
+		y++
+		ctx.fillRect(0,y,50,120);
+		setTimeout(loop,10);
+
+
+	})();
 }
+
+
+
+
 
 
 
