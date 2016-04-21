@@ -134,6 +134,8 @@ function draw(){
 	}
 	*/
 
+	//設定の保存・復元
+	/*
 	ctx.fillStyle = "yellow";
 	ctx.save();
 
@@ -144,7 +146,28 @@ function draw(){
 
 	ctx.restore();
 	ctx.fillRect(200,0,50,50);
+	*/
+
+	//ランダム生成
+	ctx.globalAlpha = 0.5;
+	for (var i = 0; i < 100; i++) {
+		var x = Math.floor(Math.random()*400);
+		var y = Math.floor(Math.random()*200);
+		var r = Math.floor(Math.random()*200);
+
+		ctx.fillStyle = "rgb("+ rgb() + "," + rgb() + "," +rgb() +")";
+		ctx.beginPath();
+		ctx.arc(x,y,r,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fill();
+
+	}
+
+	function rgb(){
+		return Math.floor(Math.random() *255);
+	}
 
 }
+
 
 
