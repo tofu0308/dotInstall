@@ -38,7 +38,7 @@
 			this.vx = rand(-10,10);
 			this.vy = rand(-10,10);
 
-			this.color = 'hsla(120, 80%, 40%, 0.8)';
+			this.color = 'hsla('+ rand(50,100) + ',' + rand(40,80) + '%,'  + rand(40,80) + '%,' + Math.random() + ')';
 			this.draw = function(){
 				ctx.beginPath();
 				ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
@@ -47,6 +47,15 @@
 				ctx.fill();
 			};
 			this.move = function(){
+				if(this.x + this.r > canvas.width||this.x - this.r < 0){
+					this.vx *= -1;
+				}
+
+				if(this.y + this.r > canvas.height||this.y - this.r < 0){
+					this.vy *= -1;
+				}
+
+
 				this.x += this.vx;
 				this.y += this.vy;
 			}
