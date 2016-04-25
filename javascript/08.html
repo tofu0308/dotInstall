@@ -17,8 +17,8 @@
 		//canvasの設定
 		var canvas;
 		var ctx;
-
 		var Ball;
+		var balls = [];
 
 		canvas = document.getElementById('myCanvas');
 		if(!canvas || !canvas.getContext) return false;
@@ -29,6 +29,15 @@
 			//Math.floor(Math.random()*(n + 1))
 			return min + Math.floor(Math.random() * (max - min + 1));
 		}
+
+		//クリックイベント
+		canvas.addEventListener('click',function(){
+			var x,y,r;
+			x = rand(100,400);
+			y = rand(100,200);
+			r = rand(0,100) < 20 ? rand(50,80):rand(10,35);
+			balls.push(new Ball(x,y,r));
+		})
 
 		Ball = function(x, y, r){
 			this.x = x;
@@ -65,10 +74,15 @@
 		ball.draw();
 
 		function update(){
+			var i;
+
 			ctx.fillStyle = '#ecf0f1';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
-			ball.draw();
-			ball.move();
+			for (i = 0; i<balls.length; i++) {
+				balls[i].draw();
+				balls[i].move();				
+			};
+
 			setTimeout(function(){
 				update();
 			},30);
