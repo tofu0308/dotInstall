@@ -34,6 +34,10 @@
 			this.x = x;
 			this.y = y;
 			this.r = r;
+			//加速
+			this.vx = rand(-10,10);
+			this.vy = rand(-10,10);
+
 			this.color = 'hsla(120, 80%, 40%, 0.8)';
 			this.draw = function(){
 				ctx.beginPath();
@@ -42,10 +46,25 @@
 				ctx.closePath();
 				ctx.fill();
 			};
+			this.move = function(){
+				this.x += this.vx;
+				this.y += this.vy;
+			}
 		};
 
 		var ball = new Ball(rand(100,200), rand(100,200), rand(10,80));
 		ball.draw();
+
+		function update(){
+			ctx.fillStyle = '#ecf0f1';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			ball.draw();
+			ball.move();
+			setTimeout(function(){
+				update();
+			},30);
+		}
+		update();
 
 	})();
 
@@ -54,3 +73,4 @@
 
 </body>
 </html>
+
