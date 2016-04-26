@@ -20,6 +20,9 @@
 		var Ball;
 		var balls = [];
 
+		var Stage;
+		var stage;
+
 		canvas = document.getElementById('myCanvas');
 		if(!canvas || !canvas.getContext) return false;
 		ctx = canvas.getContext('2d');
@@ -102,22 +105,32 @@
 		ball.draw();
 		*/
 
-		function update(){
-			var i;
+		Stage = function(){
+			this.update = function(){
+				var i;
+				this.clear();
 
-			ctx.fillStyle = '#ecf0f1';
-			ctx.fillRect(0, 0, canvas.width, canvas.height);
-			for (i = 0; i<balls.length; i++) {
-				balls[i].draw();
-				balls[i].move();				
+				for (i = 0; i<balls.length; i++) {
+					balls[i].draw();
+					balls[i].move();				
+				};
+
+				setTimeout(function(){
+					this.update(); //stage.update
+				}.bind(this),30);
 			};
 
-			setTimeout(function(){
-				update();
-			},30);
-		}
-		update();
+			this.clear = function(){
+				ctx.fillStyle = '#ecf0f1';
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			}
+		};
 
+
+
+
+		stage = new Stage();
+		stage.update();
 	})();
 
 
