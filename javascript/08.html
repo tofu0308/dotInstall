@@ -43,6 +43,13 @@
 			y = e.clientY - rect.top;			
 
 			r = rand(0,100) < 20 ? rand(50,80):rand(10,35);
+			
+			//円が発生時に2辺に接してしまう際の処理
+			if ( x - r < 0)  x = r;
+			if ( y - r < 0)  y = r;
+			if (x + r > canvas.width) x = canvas.width - r;
+			if (y + r > canvas.height) y = canvas.height - r;
+
 			balls.push(new Ball(x,y,r));
 		})
 
