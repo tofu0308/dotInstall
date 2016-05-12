@@ -8,25 +8,25 @@ body {
 	height: 40px;
 	width: 40px;
 	position: fixed;
+	left: 10px;
 	top: 10px;
 }
 
 #box1 {
-	left: 10px;
 	background-color: red;
 }
 
 #box2 {
-	left: 60px;
 	background-color: blue;
 }
 
 #box3 {
-	left: 110px;
 	background-color: yellow;
 }
 
-
+#box4 {
+	background-color: green;
+}
 
 
 
