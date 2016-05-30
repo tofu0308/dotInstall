@@ -26,7 +26,18 @@ $(function(){
 
 		$('#bg1').css('background-position','0 '+dy+'px');
 
+		if(dy >800 ){
+			$('#bg2').css('background-position','0 '+ (dy - 800) +'px');
+		}else{
+			$('#bg2').css('background-position','0 0');
+		}
 		
+		if(dy >1600 ){
+			$('#bg3').css('background-position','0 '+ (dy - 1600) +'px');
+		}else{
+			$('#bg3').css('background-position','0 0');
+		}
+
 
 	})
 })
