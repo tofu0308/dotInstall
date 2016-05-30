@@ -33,7 +33,7 @@ $(function(){
 		}
 		
 		if(dy >1600 ){
-			$('#bg3').css('background-position','0 '+ (dy - 1600) +'px');
+			$('#bg3').css('background-position','0 '+ (dy - 1600)*2 +'px');
 		}else{
 			$('#bg3').css('background-position','0 0');
 		}
