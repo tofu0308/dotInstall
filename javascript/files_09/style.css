@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	height: 3000px;
+	min-height: 3000px;
 }
 
 .box {
@@ -29,5 +29,14 @@ body {
 }
 
 
+.bgbox{
+	width: 1200px;
+	height: 800px;
+}
+
+#bg1 {background:url(../../img/01.jpg) no-repeat;}
+#bg2 {background:url(../../img/02.jpg) no-repeat;}
+#bg3 {background:url(../../img/03.jpg) no-repeat;}
+#bg4 {background:url(../../img/04.jpg) no-repeat;}
 
 
