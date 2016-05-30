@@ -24,5 +24,9 @@ $(function(){
 		$('#box4').css('top' , pos4.top + dy/8);
 		$('#box4').css('left' , pos4.left + dy/16);
 
+		$('#bg1').css('background-position','0 '+dy+'px');
+
+		
+
 	})
 })
