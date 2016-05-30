@@ -38,6 +38,13 @@ $(function(){
 			$('#bg3').css('background-position','0 0');
 		}
 
+		if(dy >1600 ){
+			$('#bg4').css('opacity',(dy - 1600)/800);
+			$('body').css('padding-bottom','800px');
+		}else{
+			$('#bg4').css('opacity','0');
+		}
+
 
 	})
 })

@@ -37,6 +37,11 @@ body {
 #bg1 {background:url(../../img/01.jpg) no-repeat;}
 #bg2 {background:url(../../img/02.jpg) no-repeat;}
 #bg3 {background:url(../../img/03.jpg) no-repeat;}
-#bg4 {background:url(../../img/04.jpg) no-repeat;}
+#bg4 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background:url(../../img/04.jpg) no-repeat; opacity: 0;
+}
 
 
