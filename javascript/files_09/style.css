@@ -54,3 +54,31 @@ body {
 	opacity: 0;
 
 }
+
+
+.fbox {
+	position: fixed;
+	opacity: 0.6;
+	left: 300px;
+}
+
+#fb01 {
+	width: 40px;
+	height: 40px;
+	top: 140px;
+	background: purple;
+}
+
+#fb02 {
+	width: 50px;
+	height: 50px;
+	top: 150px;
+	background: pink;
+}
+
+#fb03 {
+	width: 60px;
+	height: 60px;
+	top: 160px;
+	background: coral;
+}
