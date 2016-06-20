@@ -44,4 +44,13 @@ body {
 	background:url(../../img/04.jpg) no-repeat; opacity: 0;
 }
 
+#msg {
+	position: fixed;
+	z-index: 6;
+	font-size: 48px;
+	font-weight: bold;
+	font-family: sans-serif;
+	color: #ff0000;
+	opacity: 0;
 
+}

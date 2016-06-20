@@ -45,6 +45,16 @@ $(function(){
 			$('#bg4').css('opacity','0');
 		}
 
+		if(dy >1600 ){
+			$('#msg').css('opacity',(dy - 1600)/800);
+			$('#msg').css('top', 800);
+			var dx = (dy - 1600) > 600 ?  600:(dy - 1600);
+			$('#msg').css('left', dx);
+
+		}else{
+			$('#msg').css('opacity','0');
+		}
+
 
 	})
 })
