@@ -6,7 +6,7 @@ $(function(){
 
 	$(window).scroll(function(){
 		var dy = $(this).scrollTop();
-		console.log(dy);
+		console.log('scropll = ' +dy);
 
 		$('#box1').css('top' , pos1.top + dy/2);
 		$('#box1').css('left' , pos1.left + dy/4);
@@ -54,7 +54,23 @@ $(function(){
 		}else{
 			$('#msg').css('opacity','0');
 		}
-
-
 	})
-})
+
+	$('body').mousemove(function(e){
+		console.log("cursor position = " + e.clientX, e.clientY);
+		var cx = $(this).width() /2
+		var cy = $(this).height() /2
+		var dx = e.clientX - cx;
+		var dy = e.clientY - cy;
+
+		$('#fb01').css('left' , cx + dx * 1.1);
+		$('#fb02').css('left' , cx + dx * 1.2);
+		$('#fb03').css('left' , cx + dx * 1.3);
+
+		$('#fb01').css('top' , cy + dy * 1.0);
+		$('#fb02').css('top' , cy + dy * 1.05);
+		$('#fb03').css('top' , cy + dy * 1.1);
+
+	});
+});
+

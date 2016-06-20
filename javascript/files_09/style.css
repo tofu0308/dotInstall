@@ -60,6 +60,7 @@ body {
 	position: fixed;
 	opacity: 0.6;
 	left: 300px;
+	border-radius: 50%
 }
 
 #fb01 {
