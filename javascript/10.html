@@ -4,27 +4,52 @@
 	<meta charset="UTF-8">
 	<title>パララックス</title>
 	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<link rel="stylesheet" href="files_09/style.css">
+	<link rel="stylesheet" href="files_10/style.css">
 
 </head>
+<style>
+body {
+	background: #fff;
+	position: relative;
+}
+#content img {
+	width: 100%;
+	}
+
+#loader {
+	margin: 32% auto;
+	width: 300px;
+	text-align: center;
+	font-size: 25px;
+	color: #000;
+	
+	}
+#bar {
+	width: 300px;
+	height: 4px;
+	border:1px solid #000;
+	padding: 1px;
+	margin-top: 20px;
+	font-size: 1px;
+	}
+#bar span {
+	display: block;
+	width: 0px;
+	height: 2px;
+	background: #000;
+	}
+</style>
+</head>
 <body>
-	<div id="bg1" class="bgbox"></div>
-	<div id="bg2" class="bgbox"></div>
-	<div id="bg3" class="bgbox"></div>
-	<div id="bg4" class="bgbox"></div>
-	<div id="msg" class="bgbox">the end.</div>
+<div id="loader">
+	Loading... <span id="load-text">0%</span>
+	<div id="bar"><span></span></div>
+</div>
+<div id="content">
+	
+</div>
 
-	<div id="box1" class="box"></div>
-	<div id="box2" class="box"></div>
-	<div id="box3" class="box"></div>
-	<div id="box4" class="box"></div>
-
-	<div id="fb01" class="fbox"></div>
-	<div id="fb02" class="fbox"></div>
-	<div id="fb03" class="fbox"></div>
-
-
-	<script src="files_09/script.js"></script>
+	<script src="files_10/script.js"></script>
 </body>
 </html>
 
