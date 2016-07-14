@@ -32,6 +32,8 @@ $(function() {
 		if (loaded >= total) {	// すべて読み込んだ
 			$('#loader').fadeOut('slow', function() {
 				$('#content').fadeIn('slow');
+				$('#content').addClass('scrollAble')
+				$('body').height(20000);
 
 			});
 		} else {	// 読み込み途中
@@ -40,5 +42,6 @@ $(function() {
 			$('#bar span').css('width', percent + '%');
 		}
 	});
+
 
 });
