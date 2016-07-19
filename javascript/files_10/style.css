@@ -4,11 +4,12 @@ body {
 }
 
 #content {
+	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
 	background-image: url(../../img/10/001.jpg);
-	background-size: auto 1200px;
+	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
 	width: 100%;
