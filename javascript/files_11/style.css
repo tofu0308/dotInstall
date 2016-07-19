@@ -1,0 +1,21 @@
+body {
+	height: 10000px;
+	position: relative;
+	background: #dcdcdc;
+}
+
+.scroll {
+	position: fixed;
+	top: 4px;
+	right: 4px;
+}
+
+.bar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 8px;
+	background-color:#000;
+
+}
