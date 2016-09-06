@@ -24,7 +24,10 @@
 
 	var scene;
 	var box; //mesh
-	var sphere
+	var sphere1
+	var sphere2
+	var sphere3
+
 	var plane
 
 	var light;
@@ -56,15 +59,38 @@
 	scene.add(box);
 
 	// sphere
-	sphere = new THREE.Mesh(
+	sphere1 = new THREE.Mesh(
 		new THREE.SphereGeometry(50,20,20),
-		new THREE.MeshLambertMaterial({
-			color: new THREE.Color(0xffff00)
+		new THREE.MeshBasicMaterial({
+			color: new THREE.Color(0x666666)
 		})
 	);
 
-	sphere.position.set(100, 40, 0);
-	scene.add(sphere);
+	sphere1.position.set(100, 40, -150);
+	scene.add(sphere1);
+
+	// sphere
+	sphere2 = new THREE.Mesh(
+		new THREE.SphereGeometry(50,20,20),
+		new THREE.MeshLambertMaterial({
+			color: new THREE.Color(0x666666)
+		})
+	);
+
+	sphere2.position.set(100, 40, 0);
+	scene.add(sphere2);
+
+	// sphere
+	sphere3 = new THREE.Mesh(
+		new THREE.SphereGeometry(50,20,20),
+		new THREE.MeshPhongMaterial({
+			color: new THREE.Color(0x666666)
+		})
+	);
+
+	sphere3.position.set(100, 40, 150 );
+	scene.add(sphere3);
+
 
 	// plane
 	plane = new THREE.Mesh(
