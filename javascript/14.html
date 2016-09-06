@@ -22,6 +22,9 @@
 
 	var scene;
 	var box; //mesh
+	var head; //mesh
+	var body; //mesh
+
 	var light;
 	var ambient;
 	var camera;
@@ -57,9 +60,10 @@
 			color: new THREE.Color(0xff00ff)
 		})
 	);
+
 	//box.position.set(0, 0, 0);
 	
-	//浮かす
+	/*
 	box.position.x = 50;
 	box.position.y = 40;
 	box.position.z = 0;
@@ -69,9 +73,27 @@
 
 	box.rotation.x = 45 * Math.PI / 180;
 	box.rotation.set(70 * Math.PI / 180, 0 ,0); 
+	*/
+
+	//scene.add(box);
 
 
-	scene.add(box);
+	head = new THREE.Mesh(
+		new THREE.BoxGeometry(20, 20, 20),
+		new THREE.MeshLambertMaterial({color: new THREE.Color(0xff00ff)})
+	);
+
+	head.position.set(0, 40, 0);
+	scene.add(head);
+
+	body = new THREE.Mesh(
+		new THREE.BoxGeometry(40, 60, 40),
+		new THREE.MeshLambertMaterial({color: new THREE.Color(0xff00ff)})
+	);
+
+	body.position.set(0, 0, 0);
+	scene.add(body);
+
 
 	//light
 	light = new THREE.DirectionalLight(0xffffff, 1);
