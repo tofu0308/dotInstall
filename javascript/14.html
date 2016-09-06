@@ -25,9 +25,14 @@
 	var light;
 	var ambient;
 	var camera;
+
+	var gridHelper;
+	var axisHelper;
+	var lightHelper;
+
 	var renderer;
 	var width = 500;
-	var height = 200;
+	var height = 250;
 
 	//scene
 	scene = new THREE.Scene();
@@ -54,6 +59,17 @@
 	camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
 	camera.position.set(200, 100, 300);
 	camera.lookAt(scene.position);
+
+	//helper
+	gridHelper = new THREE.GridHelper(500, 250);
+	scene.add(gridHelper);
+
+	axisHelper = new THREE.AxisHelper(1000);
+	scene.add(axisHelper);
+
+	lightHelper = new THREE.DirectionalLightHelper(light, 20);
+	scene.add(lightHelper);
+
 
 	//renderer
 	renderer = new THREE.WebGLRenderer({ antialias : true });
