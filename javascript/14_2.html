@@ -12,6 +12,8 @@
 	<div id="stage"></div>
 
 <script src="../lib/three.min.js"></script>
+<script src="../lib/OrbitControls.js"></script>
+
 <script src="../lib/VRControls.js"></script>
 <script src="../lib/VREffect.js"></script>
 <script src="../lib/webvr-polyfill.js"></script>
@@ -29,6 +31,8 @@
 	var gridHelper;
 	var axisHelper;
 	var lightHelper;
+
+	var controls;
 
 	var renderer;
 	var width = 500;
@@ -72,6 +76,8 @@
 	lightHelper = new THREE.DirectionalLightHelper(light, 20);
 	scene.add(lightHelper);
 
+	//controls
+	controls = new THREE.OrbitControls(camera);
 
 	//renderer
 	renderer = new THREE.WebGLRenderer({ antialias : true });
