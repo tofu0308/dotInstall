@@ -22,6 +22,9 @@
 
 	var scene;
 	var box; //mesh
+	
+	var person;
+
 	var head; //mesh
 	var body; //mesh
 
@@ -61,6 +64,8 @@
 		})
 	);
 
+
+
 	//box.position.set(0, 0, 0);
 	
 	/*
@@ -76,7 +81,7 @@
 	*/
 
 	//scene.add(box);
-
+　
 
 	head = new THREE.Mesh(
 		new THREE.BoxGeometry(20, 20, 20),
@@ -84,7 +89,7 @@
 	);
 
 	head.position.set(0, 40, 0);
-	scene.add(head);
+	//scene.add(head);
 
 	body = new THREE.Mesh(
 		new THREE.BoxGeometry(40, 60, 40),
@@ -92,7 +97,11 @@
 	);
 
 	body.position.set(0, 0, 0);
-	scene.add(body);
+	//scene.add(body);
+
+	person = new THREE.Group();
+	person.add(head,body);
+	scene.add(person);
 
 
 	//light
