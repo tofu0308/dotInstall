@@ -40,8 +40,18 @@ var main = function () {
 	var mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
-	//表示する
-	renderer.render(scene,camera);
+	//回転処理
+	(function renderLoop(){
+		requestAnimationFrame(renderLoop);
+		mesh.rotation.set(
+			0,
+			mesh.rotation.y + 0.01,
+			mesh.rotation.z + 0.01
+		)
+
+		//表示する
+		renderer.render(scene,camera);
+	})();
 };
 
 window.addEventListener( 'DOMContentLoaded', main, false );
