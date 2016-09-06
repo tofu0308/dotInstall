@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>WebGLプログラミング</title>
+
+</head>
+</head>
+<body>
+
+<script src="../lib/three.min.js"></script>
+
+<script src="three.min.js"></script>
+<script>
+var main = function () {
+	//カメラ
+	var scene = new THREE.Scene();
+
+	var width  = 600;
+	var height = 400;
+	var fov    = 60;
+	var aspect = width / height;
+	var near   = 1;
+	var far    = 1000;
+	var camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
+	camera.position.set( 0, 0, 50 );
+
+	//レンダラー
+	var renderer = new THREE.WebGLRenderer();
+	renderer.setSize(width, height);
+	document.body.appendChild(renderer.domElement);
+
+};
+
+window.addEventListener( 'DOMContentLoaded', main, false );
+</script>
+
+
+
+</body>
+</html>
+
