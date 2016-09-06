@@ -40,7 +40,8 @@ var main = function () {
 	var mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
-
+	//表示する
+	renderer.render(scene,camera);
 };
 
 window.addEventListener( 'DOMContentLoaded', main, false );
