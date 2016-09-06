@@ -30,6 +30,14 @@
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
 
+	//箱を設置
+	var geometry = new THREE.BoxGeometry(1, 1, 1);
+	var material = new THREE.MeshBasicMaterial({color:0xff0000})
+	var cube = new THREE.Mesh(geometry, material);
+	cube.position.set(0, 0, -5);
+	scene.add(cube);
+	renderer.render(scene, camera);
+
 </script>
 
 
