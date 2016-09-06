@@ -33,6 +33,7 @@
 	var renderer;
 	var width = 500;
 	var height = 250;
+	var theata = 0;
 
 	//scene
 	scene = new THREE.Scene();
@@ -78,7 +79,18 @@
 	renderer.setPixelRatio(window.devicePixelRatio);
 	document.getElementById('stage').appendChild(renderer.domElement);
 
-	renderer.render(scene, camera)
+
+	function render(){
+		requestAnimationFrame(render);
+		
+		theata += 0.1;
+		camera.position.x = Math.cos(THREE.Math.degToRad(theata)) * 300;
+		camera.position.z = Math.sin(THREE.Math.degToRad(theata)) * 300;
+		camera.lookAt(scene.position);
+		//box.rotation.y += 0.01;
+		renderer.render(scene, camera)
+	}
+	render();
 
 })();
 </script>
