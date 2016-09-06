@@ -24,6 +24,9 @@
 
 	var scene;
 	var box; //mesh
+	var sphere
+	var plane
+
 	var light;
 	var ambient;
 	var camera;
@@ -41,7 +44,6 @@
 
 	//scene
 	scene = new THREE.Scene();
-
 	
 	box = new THREE.Mesh(
 		new THREE.BoxGeometry(50, 50, 50),
@@ -50,8 +52,33 @@
 		})
 	);
 
-	box.position.set(0, 0, 0);
+	box.position.set(0, 20, 0);
 	scene.add(box);
+
+	// sphere
+	sphere = new THREE.Mesh(
+		new THREE.SphereGeometry(50,20,20),
+		new THREE.MeshLambertMaterial({
+			color: new THREE.Color(0xffff00)
+		})
+	);
+
+	sphere.position.set(100, 40, 0);
+	scene.add(sphere);
+
+	// plane
+	plane = new THREE.Mesh(
+		new THREE.PlaneGeometry(300, 300),
+		new THREE.MeshLambertMaterial({
+			color: new THREE.Color(0xff0000),
+			side: THREE.DoubleSide
+		})
+	);
+
+	plane.position.set(0, -10, 0);
+	plane.rotation.x = 90 * Math.PI / 180;
+	scene.add(plane);
+
 　
 	//light
 	light = new THREE.DirectionalLight(0xffffff, 1);
