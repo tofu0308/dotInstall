@@ -20,6 +20,10 @@
 <body>
 
 <script src="../lib/three.min.js"></script>
+<script src="../lib/VRControls.js"></script>
+<script src="../lib/VREffect.js"></script>
+<script src="../lib/webvr-polyfill.js"></script>
+<script src="../lib/webvr-manager.js"></script>
 
 <script>
 	//シーン、カメラ、レンダラ
@@ -30,13 +34,26 @@
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
 
+	/*
+	作業中
+
+	var controls = new 
+	*/
+
 	//箱を設置
 	var geometry = new THREE.BoxGeometry(1, 1, 1);
 	var material = new THREE.MeshBasicMaterial({color:0xff0000})
 	var cube = new THREE.Mesh(geometry, material);
 	cube.position.set(0, 0, -5);
 	scene.add(cube);
-	renderer.render(scene, camera);
+	//renderer.render(scene, camera);
+	function render(){
+		cube.rotation.x += 0.1;
+		cube.rotation.y += 0.1;
+		requestAnimationFrame(render);
+		renderer.render(scene, camera);
+	}
+	render();
 
 </script>
 
