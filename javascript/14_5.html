@@ -35,10 +35,12 @@
 
 	var controls;
 
-	var count = 200;
+	var count = 50;
 	var i;
 	var size;
 	var box;
+
+	var mouse = new THREE.Vector2();
 
 	var renderer;
 	var width = 500;
@@ -93,6 +95,19 @@
 	 		Math.random() * 200 - 100
 	 	);
 	 	scene.add(box);
+
+	 	//1. マウス座標の取得
+	 	document.addEventListener('mousemove',function(e){
+	 		var rect = e.target.getBoundingClientRect();
+
+	 		mouse.X = e.clientX - rect.left;
+	 		mouse.Y = e.clientY - rect.top;
+
+	 	});
+
+	 	//2.　WebGL系の座標系に変換
+	 	//3.　マウスから３D空間に光線を射出
+	 	//4.　光線にあたった物体を取得、操作
 	 }
 
 
