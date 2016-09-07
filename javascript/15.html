@@ -12,10 +12,26 @@
 
 
 <section>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAEvq375f3YodwGtE6bvlNxTtU3CX68E9g&sensor=FALSE"></script>
+	<script>
+		function init(){
+			var mapOptions = {
+				 center: new google.maps.LatLng(35.6890,139.7011),
+				 zoom:15,
+				 mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			var map = new google.maps.Map(document.getElementById("maps"),mapOptions);
+		}
+	</script>
 	<div>
 		<h2>36</h2>
+		<button onclick="init()">view map</button>
+		<div id="maps" style="width:500px; height:500px;"></div>
 	</div>
 </section>
+
+<hr>
 
 <section>
 	<div>
