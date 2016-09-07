@@ -24,6 +24,7 @@
 
 	var scene;
 	var box; //mesh
+	var text;
 
 	var light;
 	var ambient;
@@ -35,6 +36,7 @@
 
 	var controls;
 	var loader;
+	var loaderText;
 
 	var renderer;
 	var width = 500;
@@ -49,6 +51,26 @@
 		createBox(texture);
 		render();
 	});
+
+	loaderText = new THREE.FontLoader();
+	loaderText.load('../lib/helvetiker_regular.typeface.json',function(font){
+		createText(font);
+		render();
+	});
+
+	function createText(font){
+			text = new THREE.Mesh(
+			new THREE.TextGeometry('test text',{
+				font: font,
+				size: 24,
+				height: 4
+			}),
+			new THREE.MeshBasicMaterial({color:0x404040, side: THREE.DoubleSide})
+		);
+
+		text.position.set(-80,120,0);
+		scene.add(text);
+	}
 
 	function createBox(texture){
 		box = new THREE.Mesh(
