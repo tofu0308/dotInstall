@@ -6,14 +6,56 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
 
+
 </head>
 <body>
 <h1>外部連携の心得</h1>
 
 
+<section>
+	<div>
+		<h2>42</h2>
+		<h3>jsonp</h3>
+		<script>
+			js42({
+				"name":"りんご",
+				"color":"赤",
+				"season":"冬"
+			});
 
+			function js42(data){
+				console.log("js42->" + data["name"]);
+			}
+		</script>
+	</div>
+</section>
 
 <section>
+	<h2>41</h2>
+	<h3>httpWebRequest</h3>
+
+	<script>
+/*
+		function init2(){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET", "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF&output=json",true);
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				var view = document.getElementById("view");
+				view.innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.send(null);
+		}
+*/
+	</script>
+	
+	<div id="view"></div>
+
+</section>
+
+<section>
+
 	<div>
 		<h2>40</h2>
 		<h3>単階層json</h3>	
