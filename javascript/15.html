@@ -11,6 +11,64 @@
 <h1>外部連携の心得</h1>
 
 
+
+
+<section>
+	<div>
+		<h2>40</h2>
+		<h3>単階層json</h3>	
+		<script>
+			var js = {
+				"name" : "りんご",
+				"collor" : "赤",
+				"season" : "冬"
+			}
+
+			for(keys in js){
+				document.write("<ul>");
+				document.write("<li>" + keys + ":" + js[keys] + "</li>");
+				document.write("</ul>");
+			}
+
+			js["name"]= null;
+			js["area"] = "青森";
+
+			delete js["area"];
+
+			console.log("name=" + js["name"] + ",area=" + js["area"]);
+		</script>
+
+		<h3>多階層型json</h3>
+		<script>
+			var js2 = {"shop_menu":[
+				{"name":"醤油","price":600},
+				{"name":"塩","price":500},
+				{"name":"味噌","price":650}
+			]}
+
+			console.log("js2のデータ総数は" +　js2["shop_menu"].length + "個");
+
+			document.write("<ul>");
+			for (var i = 0; i<js2["shop_menu"].length; i++) {
+				document.write("<li>" + i + "番目のデータ" + "</li>");
+				document.write("<ul>");
+				for(keys2 in js2["shop_menu"][i]){
+					document.write("<li>" + keys2 + ":" + js2["shop_menu"][i][keys2] + "</li>");
+				}
+				document.write("</ul>")
+
+			}
+			document.write("</ul>");
+			document.write("特定データへのアクセス：０番目にアクセス → " + js2["shop_menu"][0]["name"]);
+
+		</script>
+
+
+	</div>
+
+</section>
+
+
 <section>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAEvq375f3YodwGtE6bvlNxTtU3CX68E9g&sensor=FALSE"></script>
 	<script>
