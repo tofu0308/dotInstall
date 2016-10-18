@@ -11,6 +11,27 @@
 <body>
 <h1>外部連携の心得</h1>
 
+<section>
+	<div>
+		<h2>43</h2>
+		<h3>JSONPとjavascript:JSONPの値へのアクセス</h3>
+
+		<script>
+			function js43(data) {
+				//地名の取得
+				document.write(data["Feature"][0]["Name"]);
+				//読み仮名の取得
+				document.write("(" + data["Feature"][0]["Property"]["Yomi"] + ")<br>");
+
+				var lotolon = new Array()
+				lotlon = data["Feature"][0]["Geometry"]["Coordinates"].split(",");
+				document.write("東経" + lotlon[0] + ":北緯" + lotlon[1]);
+				console.log(lotlon);
+			}	
+		</script>
+		<script src="http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF&output=json&callback=js43"></script>
+	</div>
+</section>
 
 <section>
 	<div>
@@ -35,10 +56,10 @@
 	<h3>httpWebRequest</h3>
 
 	<script>
-/*
+		/*
 		function init2(){
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("GET", "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF&output=json",true);
+			xmlhttp.open("GET", "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF&output=json&callback=js43",true);
 			xmlhttp.onreadystatechange = function(){
 				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 				var view = document.getElementById("view");
@@ -47,7 +68,7 @@
 			}
 			xmlhttp.send(null);
 		}
-*/
+		*/
 	</script>
 	
 	<div id="view"></div>
