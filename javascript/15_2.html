@@ -4,64 +4,113 @@
 	<meta charset="utf-8">
 	<title>外部連携の心得</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+	<script>
+		//for43
+		function chkLL(){
+			// yahoo appID
+			var appID = "dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-";
+			// JSONP URL
+			var URL = "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=";
+			URL = URL + appID + "&output=json&callback=js43";
+
+			// form値
+			var ADDR = "&query=" + document.form1.text1.value;
+
+			//scriptタグを生成
+			var ADDJS = document.createElement("script");
+			ADDJS.src = URL + ADDR;
+			ADDJS.charset = "utf-8";
+
+			document.body.appendChild(ADDJS);
+		}
+
+		//callback
+		function js43(data) {
+			var view = document.getElementById("view");
+
+			//地名・読み　経緯の取得
+			view.innerHTML = data["Feature"][0]["Name"] + "<br>";
+			view.innerHTML += "(" + data["Feature"][0]["Property"]["Yomi"] + ")<br>"
+
+			var lotolon = new Array()
+			lotlon = data["Feature"][0]["Geometry"]["Coordinates"].split(",");
+			view.innerHTML += "東経" + lotlon[0] + " / 北緯" + lotlon[1];
+
+			drawMAP(lotlon[0],lotlon[1]);
+		}
+
+		function drawMAP(lot,lon){
+			var mapOptions = {
+				center: new google.maps.LatLng(lon,lot),
+				zoom: 15,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			console.log(lot + "/" + lon)
+			var map = new google.maps.Map(document.getElementById("maps"),mapOptions);
+		}
+	</script>
+
+	<script>
+		//for44
+		function js44(){
+			var xmlView = document.getElementById("xmlView");
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET", "./files_15/xml_01.xml", true);
+
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+					//レスポンスデータを取得（text）
+					var XMLtext = xmlhttp.responseText;
+					console.log(XMLtext);
+
+					//レスポンスデータを取得（xml）
+					var XMLdata = xmlhttp.responseXML;
+					console.log(XMLdata);
+
+					//各部分にアクセス
+					var mem = XMLdata.getElementsByTagName("member");
+					var name = XMLdata.getElementsByTagName("name");
+					var pois = XMLdata.getElementsByTagName("point");
+					console.log("member数 → "+ mem.length)
+
+					for (var i = 0; i < mem.length; i++) {
+						xmlView.innerHTML += name[i].childNodes[0].nodeValue + " / ";
+						xmlView.innerHTML += pois[i].childNodes[0].nodeValue + "<br>";
+					}
+
+				}
+			}
+			xmlhttp.send(null);
+		}
+	</script>
+
 </head>
-<body>
+<body onLoad="js44()">
 <h1>外部連携の心得</h1>
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAEvq375f3YodwGtE6bvlNxTtU3CX68E9g"></script>
 
-<script>
-	function chkLL(){
-		// yahoo appID
-		var appID = "dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-";
-		// JSONP URL
-		var URL = "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=";
-		URL = URL + appID + "&output=json&callback=js43";
+<section>
+	<div>
+		<h2>44 xml</h2>
+		<div id="xmlView"></div>
+	</div>
+</section>
 
-		// form値
-		var ADDR = "&query=" + document.form1.text1.value;
+<section>
+	<div>
+		<h2>43 コールバック</h2>
 
-		//scriptタグを生成
-		var ADDJS = document.createElement("script");
-		ADDJS.src = URL + ADDR;
-		ADDJS.charset = "utf-8";
+		<form name="form1">
+			検索する住所を入力:
+			<input type="text" name="text1">
+			<input type="button" onClick="chkLL()" value="緯度経度を取得">
+		</form>
 
-		document.body.appendChild(ADDJS);
-	}
+		<div id="view"></div>
+		<div id="maps" style="width:500px; height:500px;"></div>
+	</div>
+</section>
 
-	//callback
-	function js43(data) {
-		var view = document.getElementById("view");
-
-		//地名・読み　経緯の取得
-		view.innerHTML = data["Feature"][0]["Name"] + "<br>";
-		view.innerHTML += "(" + data["Feature"][0]["Property"]["Yomi"] + ")<br>"
-
-		var lotolon = new Array()
-		lotlon = data["Feature"][0]["Geometry"]["Coordinates"].split(",");
-		view.innerHTML += "東経" + lotlon[0] + " / 北緯" + lotlon[1];
-
-		drawMAP(lotlon[0],lotlon[1]);
-	}
-
-	function drawMAP(lot,lon){
-		var mapOptions = {
-			center: new google.maps.LatLng(lon,lot),
-			zoom: 15,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		console.log(lot + "/" + lon)
-		var map = new google.maps.Map(document.getElementById("maps"),mapOptions);
-	}
-</script>
-
-<form name="form1">
-	検索する住所を入力:
-	<input type="text" name="text1">
-	<input type="button" onClick="chkLL()" value="緯度経度を取得">
-</form>
-
-<div id="view"></div>
-<div id="maps" style="width:500px; height:500px;"></div>
 
 
 
