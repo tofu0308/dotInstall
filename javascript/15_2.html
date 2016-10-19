@@ -4,6 +4,62 @@
 	<meta charset="utf-8">
 	<title>外部連携の心得</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<script>
+		//for50
+		function js46(){
+			if(document.cookie) {
+
+				document.cookie = unescape(document.cookie);
+				alert(document.cookie);
+			}
+		}
+
+		function js46Form() {
+			if(document.form_js46.text_js46.value){
+				var cstr = escape(document.form_js46.text_js46.value);
+				cstr = "val="+ cstr;
+				document.cookie = cstr;
+ 			}else{
+ 				alert("テキストを入力");
+ 			}
+		}
+	</script>
+
+	<script>
+		//for44
+		function js44(){
+			var xmlView = document.getElementById("xmlView");
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET", "./files_15/xml_01.xml", true);
+
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+					//レスポンスデータを取得（text）
+					var XMLtext = xmlhttp.responseText;
+					console.log(XMLtext);
+
+					//レスポンスデータを取得（xml）
+					var XMLdata = xmlhttp.responseXML;
+					console.log(XMLdata);
+
+					//各部分にアクセス
+					var mem = XMLdata.getElementsByTagName("member");
+					var name = XMLdata.getElementsByTagName("name");
+					var pois = XMLdata.getElementsByTagName("point");
+					console.log("member数 → "+ mem.length)
+
+					for (var i = 0; i < mem.length; i++) {
+						xmlView.innerHTML += name[i].childNodes[0].nodeValue + " / ";
+						xmlView.innerHTML += pois[i].childNodes[0].nodeValue + "<br>";
+					}
+
+				}
+			}
+			xmlhttp.send(null);
+		}
+	</script>
+
 	<script>
 		//for43
 		function chkLL(){
@@ -50,44 +106,26 @@
 		}
 	</script>
 
-	<script>
-		//for44
-		function js44(){
-			var xmlView = document.getElementById("xmlView");
-			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("GET", "./files_15/xml_01.xml", true);
 
-			xmlhttp.onreadystatechange = function(){
-				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-					//レスポンスデータを取得（text）
-					var XMLtext = xmlhttp.responseText;
-					console.log(XMLtext);
-
-					//レスポンスデータを取得（xml）
-					var XMLdata = xmlhttp.responseXML;
-					console.log(XMLdata);
-
-					//各部分にアクセス
-					var mem = XMLdata.getElementsByTagName("member");
-					var name = XMLdata.getElementsByTagName("name");
-					var pois = XMLdata.getElementsByTagName("point");
-					console.log("member数 → "+ mem.length)
-
-					for (var i = 0; i < mem.length; i++) {
-						xmlView.innerHTML += name[i].childNodes[0].nodeValue + " / ";
-						xmlView.innerHTML += pois[i].childNodes[0].nodeValue + "<br>";
-					}
-
-				}
-			}
-			xmlhttp.send(null);
-		}
-	</script>
 
 </head>
 <body onLoad="js44()">
 <h1>外部連携の心得</h1>
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAEvq375f3YodwGtE6bvlNxTtU3CX68E9g"></script>
+
+
+<section>
+	<div>
+		<h2>46</h2>
+
+		<form name="form_js46">
+			<input type="text" name="text_js46">
+			<input type="button" onclick="js46Form()" value="cookieを記録">
+			<input type="button" onclick="js46()" value="cookieを確認">	
+		</form>
+	</div>
+</section>
+
 
 <section>
 	<div>
