@@ -8,11 +8,43 @@
 
 
 </head>
-<body>
+<body onload="main()">
 <h1>WebGL</h1>
 
+<section>
+	<div>
+		<h2>HelloCanvas</h2>
+		<canvas id="webgl" width="400" height="400">
+			Canvasをサポートしているブラウザを使用してくだい。
+		</canvas>
+
+	</div>
+</section>
 
 
+<script src="../lib/webgl/webgl-utils.js"></script>
+<script src="../lib/webgl/webgl-debug.js"></script>
+<script src="../lib/webgl/cuon-utils.js"></script>
+<script>
+	function main(){
+		//HelloCanvas.js
+		var canvas = document.getElementById('webgl');
+
+		//WebGL描画用のコンテキストを取得
+		var gl =getWebGLContext(canvas);
+
+		if(!gl){
+			console.log("WebGLコンテキストの取得に失敗");
+		}
+
+		//Canvasをクリアする色を設定
+		gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+		//クリアする
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		
+	}
+</script>
 </body>
 </html>
 
