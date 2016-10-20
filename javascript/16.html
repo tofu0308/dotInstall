@@ -29,9 +29,10 @@
 	//頂点シェーダのプログラム
 	var VSHADER_SOURCE =
 		'attribute vec4 a_Position;' +
+		'attribute float a_PointSize;' +
 		'void main() {' +
 		' gl_Position = a_Position;' +
-		' gl_PointSize = 10.0;' +
+		' gl_PointSize = a_PointSize;' +
 		'}';
 
 	//フラグメントシェーダのプログラム
@@ -61,13 +62,16 @@
 		//attribute変数の格納場所を取得
 		var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
 
-		if(a_Position < 0){
-			console.log('a_Positionの格納場所の取得に失敗');
+		if(a_Position < 0 || a_PointSize < 0){
+			console.log('a_Positionまたはa_PointSizeの格納場所の取得に失敗');
 			return;
 		}
 
+		var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
+
 		//attribute変数の点に座標を代入する
-		gl.vertexAttrib3f(a_Position, 0.5, 0.0, 0.0);	
+		gl.vertexAttrib3f(a_Position, 0.5, 0.0, 0.0);
+		gl.vertexAttrib1f(a_PointSize, 50.0);
 
 		//Canvasをクリアする色を設定
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
