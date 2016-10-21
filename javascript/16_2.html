@@ -143,6 +143,8 @@
 		//回転行列を設定
 		modelMatrix.setRotate(currentAngle, 0, 0, 1);
 
+		modelMatrix.translate(0.35, 0, 0);
+
 		//回転行列を頂点シェーダに渡す
 		gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
 
@@ -159,6 +161,7 @@
 		//前回呼び出されてからの経過時間を計算
 		var now = new Date().getTime();
 		var elapsed = now - g_last;
+		g_last = now;
 
 		//回転角度を更新
 		var newAngle = angle + (ANGLE_STEP * elapsed) / 1000.0;
