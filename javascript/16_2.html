@@ -41,7 +41,11 @@
 	'}'
 
 	//回転の角度
-	var ANGLE = 90.0;
+	//var ANGLE = 90.0;
+
+	var Tx =0.5;
+	var Ty =0.5;
+	var Tz =0.0;
 
 	function main(){
 		var canvas = document.getElementById('webgl');
@@ -68,16 +72,18 @@
 		}
 
 		//回転の行列を作成する
+		/*
 		var radian = Math.PI * ANGLE / 180.0;
 		var cosB = Math.cos(radian);
 		var sinB = Math.sin(radian);
+		*/
 
 		//※WebGLは列優先
 		var rotMatrix = new Float32Array([
-			cosB, sinB, 0.0, 0.0,
-			-sinB, cosB, 0.0, 0.0,
+			1.0, 0.0, 0.0, 0.0,
+			0.0, 1.0, 0.0, 0.0,
 			0.0, 0.0, 1.0, 0.0,
-			0.0, 0.0, 0.0, 1.0
+			Tx, Ty, Tz, 1.0
 		]);
 
 		//回転行列を商店シェーダに渡す
