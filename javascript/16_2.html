@@ -43,9 +43,12 @@
 	//回転の角度
 	//var ANGLE = 90.0;
 
-	var Tx =0.5;
-	var Ty =0.5;
-	var Tz =0.0;
+	var Tx = 0.0;
+	var Ty = 0.0;
+	var Tz = 0.0;
+	var Sx = 1.0;
+	var Sy = 1.5;
+	var Sz = 1.0;
 
 	function main(){
 		var canvas = document.getElementById('webgl');
@@ -80,9 +83,9 @@
 
 		//※WebGLは列優先
 		var rotMatrix = new Float32Array([
-			1.0, 0.0, 0.0, 0.0,
-			0.0, 1.0, 0.0, 0.0,
-			0.0, 0.0, 1.0, 0.0,
+			Sx, 0.0, 0.0, 0.0,
+			0.0, Sy, 0.0, 0.0,
+			0.0, 0.0, Sz, 0.0,
 			Tx, Ty, Tz, 1.0
 		]);
 
