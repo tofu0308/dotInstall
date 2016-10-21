@@ -28,16 +28,10 @@
 <script>
 	//頂点シェーダのプログラム
 	var VSHADER_SOURCE =
-		//x' = x cosβ - y sinβ
-		//y' = y sinβ + y cosβ
-		//z' = z
 		'attribute vec4 a_Position;' +
-		'uniform float u_CosB, u_SinB;' +
+		'uniform mat4 u_rotMatrix;' +
 		'void main() {' +
-		'	gl_Position.x = a_Position.x * u_CosB - a_Position.y * u_SinB;' +
-		'	gl_Position.y = a_Position.x * u_SinB + a_Position.y * u_CosB;' +
-		'	gl_Position.z = a_Position.z;' +
-		'	gl_Position.w = 1.0;' +
+		'	gl_Position = u_rotMatrix * a_Position;' +
 		'}';
 
 	//フラグメントシェーダのプログラム
@@ -73,20 +67,27 @@
 			return;
 		}
 
-		//回転の計算に必要なデータを計算し、頂点シェーダに渡す。
-		var radian = Math.PI * ANGLE / 180;
+		//回転の行列を作成する
+		var radian = Math.PI * ANGLE / 180.0;
 		var cosB = Math.cos(radian);
 		var sinB = Math.sin(radian);
 
-		var u_CosB = gl.getUniformLocation(gl.program, 'u_CosB');
-		var u_SinB = gl.getUniformLocation(gl.program, 'u_SinB');
-		if(!u_CosB || !u_SinB){
-			console.log("u_CosBまたはu_SinBの格納場の取得に失敗");
+		//※WebGLは列優先
+		var rotMatrix = new Float32Array([
+			cosB, sinB, 0.0, 0.0,
+			-sinB, cosB, 0.0, 0.0,
+			0.0, 0.0, 1.0, 0.0,
+			0.0, 0.0, 0.0, 1.0
+		]);
+
+		//回転行列を商店シェーダに渡す
+		var u_rotMatrix = gl.getUniformLocation(gl.program, 'u_rotMatrix');
+		if(!u_rotMatrix){
+			console.log("u_rotMatrixの格納場の取得に失敗");
 			return;
 		}
 
-		gl.uniform1f(u_CosB, cosB);
-		gl.uniform1f(u_SinB, sinB);
+		gl.uniformMatrix4fv(u_rotMatrix, false, rotMatrix);
 
 		//Canvasをクリアする色を設定
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
