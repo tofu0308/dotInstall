@@ -28,10 +28,16 @@
 <script>
 	//頂点シェーダのプログラム
 	var VSHADER_SOURCE =
+		//x' = x cosβ - y sinβ
+		//y' = y sinβ + y cosβ
+		//z' = z
 		'attribute vec4 a_Position;' +
-		'uniform vec4 u_Translation;' +
+		'uniform float u_CosB, u_SinB;' +
 		'void main() {' +
-		'	gl_Position = a_Position + u_Translation;' +
+		'	gl_Position.x = a_Position.x * u_CosB - a_Position.y * u_SinB;' +
+		'	gl_Position.y = a_Position.x * u_SinB + a_Position.y * u_CosB;' +
+		'	gl_Position.z = a_Position.z;' +
+		'	gl_Position.w = 1.0;' +
 		'}';
 
 	//フラグメントシェーダのプログラム
@@ -40,10 +46,8 @@
 	'	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);'+
 	'}'
 
-	//平行移動量
-	var Tx = 0.5;
-	var Ty = 0.5;
-	var Tz = 0.0;
+	//回転の角度
+	var ANGLE = 90.0;
 
 	function main(){
 		var canvas = document.getElementById('webgl');
@@ -69,15 +73,20 @@
 			return;
 		}
 
-		//平行移動量を頂点シェーダに設定
-		var u_Translation = gl.getUniformLocation(gl.program, 'u_Translation');
-		if(!u_Translation){
-			console.log("u_Translationの格納場所の取得に失敗");
+		//回転の計算に必要なデータを計算し、頂点シェーダに渡す。
+		var radian = Math.PI * ANGLE / 180;
+		var cosB = Math.cos(radian);
+		var sinB = Math.sin(radian);
+
+		var u_CosB = gl.getUniformLocation(gl.program, 'u_CosB');
+		var u_SinB = gl.getUniformLocation(gl.program, 'u_SinB');
+		if(!u_CosB || !u_SinB){
+			console.log("u_CosBまたはu_SinBの格納場の取得に失敗");
 			return;
 		}
 
-		gl.uniform4f(u_Translation, Tx, Ty, Tz, 0.0);
-
+		gl.uniform1f(u_CosB, cosB);
+		gl.uniform1f(u_SinB, sinB);
 
 		//Canvasをクリアする色を設定
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
