@@ -42,17 +42,7 @@
 	'}'
 
 	//回転の角度
-	//var ANGLE = 90.0;
-
-	//座標
-	var Tx = 0.0;
-	var Ty = 0.0;
-	var Tz = 0.0;
-	
-	//サイズ
-	var Sx = 1.0;
-	var Sy = 1.5;
-	var Sz = 1.0;
+	var ANGLE = 90.0;
 
 	function main(){
 		var canvas = document.getElementById('webgl');
@@ -78,29 +68,20 @@
 			return;
 		}
 
-		//回転の行列を作成する
-		/*
-		var radian = Math.PI * ANGLE / 180.0;
-		var cosB = Math.cos(radian);
-		var sinB = Math.sin(radian);
-		*/
+		//回転行列用のMatrix4オブジェクトを作成する
+		var rotMatrix = new Matrix4();
 
-		//※WebGLは列優先
-		var rotMatrix = new Float32Array([
-			Sx, 0.0, 0.0, 0.0,
-			0.0, Sy, 0.0, 0.0,
-			0.0, 0.0, Sz, 0.0,
-			Tx, Ty, Tz, 1.0
-		]);
+		//回転行列をrotMatrixに設定する
+		rotMatrix.setRotate(ANGLE, 0, 0, 1);
 
 		//回転行列を商店シェーダに渡す
 		var u_rotMatrix = gl.getUniformLocation(gl.program, 'u_rotMatrix');
 		if(!u_rotMatrix){
-			console.log("u_rotMatrixの格納場の取得に失敗");
+			console.log("u_rotMatrixの格納場所の取得に失敗");
 			return;
 		}
 
-		gl.uniformMatrix4fv(u_rotMatrix, false, rotMatrix);
+		gl.uniformMatrix4fv(u_rotMatrix, false, rotMatrix.elements);
 
 		//Canvasをクリアする色を設定
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
