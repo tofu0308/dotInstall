@@ -76,10 +76,10 @@
 		var ANGLE = 60.0;
 		//平行移動量
 		var Tx = 0.5;
-		//回転行列を設定
-		modelMatrix.setRotate(ANGLE, 0, 0, 1);
 		//平行移動行列を乗算
-		modelMatrix.translate(Tx, 0, 0);
+		modelMatrix.setTranslate(Tx, 0, 0);
+		//回転行列を設定
+		modelMatrix.rotate(ANGLE, 0, 0, 1);
 
 
 		//回転行列を商店シェーダに渡す
