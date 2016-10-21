@@ -29,8 +29,9 @@
 	//頂点シェーダのプログラム
 	var VSHADER_SOURCE =
 		'attribute vec4 a_Position;' +
+		'uniform vec4 u_Translation;' +
 		'void main() {' +
-		' gl_Position = a_Position;' +
+		'	gl_Position = a_Position + u_Translation;' +
 		'}';
 
 	//フラグメントシェーダのプログラム
@@ -38,6 +39,12 @@
 	'void main(){' +
 	'	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);'+
 	'}'
+
+	//平行移動量
+	var Tx = 0.5;
+	var Ty = 0.5;
+	var Tz = 0.0;
+
 	function main(){
 		var canvas = document.getElementById('webgl');
 
@@ -61,6 +68,17 @@
 			console.log("頂点座標の設定に失敗")
 			return;
 		}
+
+		//平行移動量を頂点シェーダに設定
+		var u_Translation = gl.getUniformLocation(gl.program, 'u_Translation');
+		if(!u_Translation){
+			console.log("u_Translationの格納場所の取得に失敗");
+			return;
+		}
+
+		gl.uniform4f(u_Translation, Tx, Ty, Tz, 0.0);
+
+
 		//Canvasをクリアする色を設定
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
@@ -68,19 +86,18 @@
 		gl.clear(gl.COLOR_BUFFER_BIT);
 
 		//3点を描画
-		gl.drawArrays(gl.TRIANGLE_FAN, 0, n);
+		gl.drawArrays(gl.TRIANGLES, 0, n);
 	}
 
 	function initVertexBuffers(gl) {
 		var vertices = new Float32Array([
-			-0.5, 0.5,
 			-0.5, -0.5,
-			0.5,0.5,
-			0.5,-0.5
+			0.5, -0.5,
+			0.0,0.5
 			]);
 
 		//頂点数
-		var n = 4;
+		var n = 3;
 
 		//バッファオブジェクト作成
 		var vertexBuffer = gl.createBuffer();
