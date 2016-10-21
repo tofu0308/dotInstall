@@ -72,7 +72,8 @@
 		var rotMatrix = new Matrix4();
 
 		//回転行列をrotMatrixに設定する
-		rotMatrix.setRotate(ANGLE, 0, 0, 1);
+		//rotMatrix.setRotate(ANGLE, 0, 0, 1);
+		rotMatrix.setTranslate(0.5, 0.5, 0.0);
 
 		//回転行列を商店シェーダに渡す
 		var u_rotMatrix = gl.getUniformLocation(gl.program, 'u_rotMatrix');
