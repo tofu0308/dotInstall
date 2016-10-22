@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>WebGL+HTML5</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+</head>
+<body onload="main()">
+<h1>WebGL</h1>
+
+<section>
+	<div>
+		<h2>HelloCanvas</h2>
+		<canvas id="webgl" width="400" height="400">
+			Canvasをサポートしているブラウザを使用してくだい。
+		</canvas>
+
+	</div>
+</section>
+
+
+<script src="../lib/webgl/webgl-utils.js"></script>
+<script src="../lib/webgl/webgl-debug.js"></script>
+<script src="../lib/webgl/cuon-utils.js"></script>
+<script>
+	//頂点シェーダのプログラム
+	var VSHADER_SOURCE =
+		'attribute vec4 a_Position;' +
+		'void main() {' +
+		' gl_Position = a_Position;' +
+		'}';
+	//フラグメントシェーダのプログラム
+	var FSHADER_SOURCE =
+	'void main(){' +
+	'	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);'+
+	'}'
+	function main(){
+		var canvas = document.getElementById('webgl');
+		//WebGL描画用のコンテキストを取得
+		var gl =getWebGLContext(canvas);
+		if(!gl){
+			console.log("WebGLコンテキストの取得に失敗");
+			return;
+		}
+		//シェーダを初期化
+		if(!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)){
+			console.log("シェーダの初期化に失敗");
+			return;
+		}
+		//頂点座標を設定
+		var n = initVertexBuffers(gl);
+		if(n < 0){
+			console.log("頂点座標の設定に失敗")
+			return;
+		}
+		//Canvasをクリアする色を設定
+		gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		//クリアする
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		//3点を描画
+		gl.drawArrays(gl.TRIANGLES, 0, n);
+	}
+	function initVertexBuffers(gl) {
+		var vertices = new Float32Array([0.0, 0.5, -0.5, -0.5, 0.5, -0.5]);
+		//頂点数
+		var n = 3;
+		//バッファオブジェクト作成
+		var vertexBuffer = gl.createBuffer();
+		if(!vertexBuffer){
+			console.log("バッファオブジェクト生成に失敗");
+			return -1;
+		}
+		//バッファオブジェクトをバインド
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+		//バッファオブジェクトにデータを書き込む
+		gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+		var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+		if(a_Position < 0){
+			console.log('a_Positionの格納場所の取得に失敗');
+			return -1;
+		}
+		//a_Position変数にバッファオブジェクト割り当て
+		gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
+		//バッファオブジェクトのバインド解除
+		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+		//a_Position変数でのバッファオブジェクトの割り当てを有効にする
+		gl.enableVertexAttribArray(a_Position);
+		return n;
+	}
+</script>
+</body>
+</html>
