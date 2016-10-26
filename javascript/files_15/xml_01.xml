@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<member>
+		<name>Aさん</name>
+		<point>12</point>
+	</member>
+	<member>
+		<name>Bさん</name>
+		<point>34</point>
+	</member>
+	<member>
+		<name>Cさん</name>
+		<point>56</point>
+	</member>
+
+</list>

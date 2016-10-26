@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>外部連携の心得</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	
+
+<style>
+	#cvs,
+	#cvs2{
+		border: solid 1px #000;
+	}
+</style>
+
+<script>
+	function draw() {
+		var CVS = document.getElementById("cvs").getContext("2d");
+
+		//四角
+		CVS.beginPath();
+		CVS.lineWidth=10;
+		CVS.storokeStyle = "#000";
+
+		CVS.moveTo(50,50);
+		CVS.lineTo(50,200);
+		CVS.lineTo(200,200);
+		CVS.lineTo(200,50);
+		CVS.closePath();
+
+		CVS.stroke();
+		CVS.fillStyle = "#ff0000";
+		CVS.fill();
+
+		//三角
+		CVS.beginPath();
+		CVS.lineWidth=10;
+		CVS.storokeStyle = "#000";
+
+		CVS.moveTo(300,100);
+		CVS.lineTo(400,300);
+		CVS.lineTo(250,200);
+		CVS.closePath();
+
+		CVS.stroke();
+		CVS.fillStyle = "#ffff00";
+		CVS.fill();
+
+		//またきて四角
+		CVS.beginPath();
+		CVS.fillStyle = "#ff00ff";
+		CVS.fillRect(250, 250, 50, 50);
+
+		//円とテキスト
+		var CVS2 = document.getElementById("cvs2").getContext("2d");
+
+		CVS2.lineWidth=10;
+		CVS2.storokeStyle = "#000000";
+		CVS2.beginPath();
+		var sAng = 0;
+		var eAng = 2*Math.PI;
+		CVS2.arc(200, 200, 150, sAng, eAng, true);
+		CVS2.stroke();
+		CVS2.fillStyle = "#ff0000";
+		CVS2.fill();
+
+		CVS2.beginPath();
+		var sAng = 0;
+		var eAng = 2*Math.PI;
+		CVS2.arc(300, 300, 50, sAng, eAng, true);
+		CVS2.stroke();
+		CVS2.fillStyle = "#ffff00";
+		CVS2.fill();
+
+		CVS2.beginPath();
+		var sAng = 2*Math.PI / -4;
+		var eAng = 2*Math.PI;
+		CVS2.arc(300, 300, 150, sAng, eAng, true);
+		CVS2.lineTo(300, 300);
+		CVS2.lineTo(300, 145);
+
+
+		CVS2.fillStyle = "#00ff00";
+		CVS2.fill();
+		CVS2.stroke();
+
+		//テキスト
+		CVS2.font = "メイリオ";
+		CVS2.fillStyle = "#000";
+		CVS2.fillText("円を二つなどを描画する",20,30);
+
+
+
+	}
+</script>
+
+
+
+
+</head>
+<body>
+<h1>外部連携の心得</h1>
+
+
+<section>
+	<div>
+		<h2>48 canvas</h2>
+		<canvas id="cvs" width="500" height="500"></canvas>
+		<canvas id="cvs2" width="500" height="500"></canvas>
+		<button onClick="draw()">draw</button>
+
+
+	</div>
+</section>
+
+
+
+
+</body>
+</html>
+
