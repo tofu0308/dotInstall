@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>外部連携の心得</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+</head>
+<body>
+<h1>外部連携の心得</h1>
+
+<section>
+	<div>
+		<h2>43</h2>
+		<h3>JSONPとjavascript:JSONPの値へのアクセス</h3>
+
+		<script>
+			function js43(data) {
+				//地名の取得
+				document.write(data["Feature"][0]["Name"]);
+				//読み仮名の取得
+				document.write("(" + data["Feature"][0]["Property"]["Yomi"] + ")<br>");
+
+				var lotolon = new Array()
+				lotlon = data["Feature"][0]["Geometry"]["Coordinates"].split(",");
+				document.write("東経" + lotlon[0] + ":北緯" + lotlon[1]);
+				console.log(lotlon);
+			}	
+		</script>
+		<script src="http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF&output=json&callback=js43"></script>
+	</div>
+</section>
+
+<section>
+	<div>
+		<h2>42</h2>
+		<h3>jsonp</h3>
+		<script>
+			js42({
+				"name":"りんご",
+				"color":"赤",
+				"season":"冬"
+			});
+
+			function js42(data){
+				console.log("js42->" + data["name"]);
+			}
+		</script>
+	</div>
+</section>
+
+<section>
+	<h2>41</h2>
+	<h3>httpWebRequest</h3>
+
+	<script>
+		/*
+		function init2(){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET", "http://geo.search.olp.yahooapis.jp/OpenLocalPlatform/V1/geoCoder?appid=dj0zaiZpPTlNVk9OZnczSTBZUCZzPWNvbnN1bWVyc2VjcmV0Jng9OTM-&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF&output=json&callback=js43",true);
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+				var view = document.getElementById("view");
+				view.innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.send(null);
+		}
+		*/
+	</script>
+	
+	<div id="view"></div>
+
+</section>
+
+<section>
+
+	<div>
+		<h2>40</h2>
+		<h3>単階層json</h3>	
+		<script>
+			var js = {
+				"name" : "りんご",
+				"collor" : "赤",
+				"season" : "冬"
+			}
+
+			for(keys in js){
+				document.write("<ul>");
+				document.write("<li>" + keys + ":" + js[keys] + "</li>");
+				document.write("</ul>");
+			}
+
+			js["name"]= null;
+			js["area"] = "青森";
+
+			delete js["area"];
+
+			console.log("name=" + js["name"] + ",area=" + js["area"]);
+		</script>
+
+		<h3>多階層型json</h3>
+		<script>
+			var js2 = {"shop_menu":[
+				{"name":"醤油","price":600},
+				{"name":"塩","price":500},
+				{"name":"味噌","price":650}
+			]}
+
+			console.log("js2のデータ総数は" +　js2["shop_menu"].length + "個");
+
+			document.write("<ul>");
+			for (var i = 0; i<js2["shop_menu"].length; i++) {
+				document.write("<li>" + i + "番目のデータ" + "</li>");
+				document.write("<ul>");
+				for(keys2 in js2["shop_menu"][i]){
+					document.write("<li>" + keys2 + ":" + js2["shop_menu"][i][keys2] + "</li>");
+				}
+				document.write("</ul>")
+
+			}
+			document.write("</ul>");
+			document.write("特定データへのアクセス：０番目にアクセス → " + js2["shop_menu"][0]["name"]);
+
+		</script>
+
+
+	</div>
+
+</section>
+
+
+<section>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAEvq375f3YodwGtE6bvlNxTtU3CX68E9g&sensor=FALSE"></script>
+	<script>
+		function init(){
+			var mapOptions = {
+				 center: new google.maps.LatLng(35.6890,139.7011),
+				 zoom:15,
+				 mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+
+			var map = new google.maps.Map(document.getElementById("maps"),mapOptions);
+		}
+	</script>
+	<div>
+		<h2>36</h2>
+		<button onclick="init()">view map</button>
+		<div id="maps" style="width:500px; height:500px;"></div>
+	</div>
+</section>
+
+<hr>
+
+<section>
+	<div>
+		<h2>35</h2>
+		<a href="https://twitter.com/ToFu0308" class="twitter-follow-button" data-show-count="false">Follow @ToFu0308</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+		<a class="twitter-timeline" href="https://twitter.com/ToFu0308">Tweets by ToFu0308</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
+</section>
+
+
+</body>
+</html>
+
