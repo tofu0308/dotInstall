@@ -31,11 +31,10 @@
 	var VSHADER_SOURCE =
 	  'attribute vec4 a_Position;\n' +
 	  'attribute vec4 a_Color;\n' +
-	  'uniform mat4 u_ViewMatrix;\n' +
-	  'uniform mat4 u_ModelMatrix;\n' +
+	  'uniform mat4 u_ModelViewMatrix;\n' +
 	  'varying vec4 v_Color;\n' +
 	  'void main() {\n' +
-	  '	gl_Position = u_ViewMatrix * u_ModelMatrix * a_Position;\n' +
+	  '	gl_Position = u_ModelViewMatrix * a_Position;\n' +
 	  '	v_Color = a_Color;\n' +
 	  '}\n';
 
@@ -75,10 +74,9 @@
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
 		//u_ViewMatrix変数の格納場所を取得する
-		var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
-		var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
-		if(!u_ViewMatrix|| !u_ModelMatrix){
-			console.log('u_ViewMatrixかu_ModelMatrixの格納場所の取得に失敗。');
+		var u_ModelViewMatrix = gl.getUniformLocation(gl.program, 'u_ModelViewMatrix');
+		if(!u_ModelViewMatrix){
+			console.log('u_ModelViewMatrixの格納場所の取得に失敗');
 			return
 		}
 
@@ -91,9 +89,12 @@
 		//z軸周りの回転
 		modelMatrix.setRotate(-10, 0, 0, 1);
 
-		//各行列をuniform変数に設定
-		gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
-		gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+		//それぞれの行列を乗算する
+		var modelViewMatrix = viewMatrix.multiply(modelMatrix);
+
+		//モデルビュー行列をu_ModelMatrix変数に設定
+		gl.uniformMatrix4fv(u_ModelViewMatrix, false, modelViewMatrix.elements);
+
 
 		//Canvasをクリア
 		gl.clear(gl.COLOR_BUFFER_BIT);
