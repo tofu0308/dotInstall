@@ -108,6 +108,15 @@
 
 		//三角形を描画
 		gl.drawArrays(gl.TRIANGLES, 0, n);
+
+		//もう一組の三角形用のモデル行列
+		modelMatrix.setTranslate(-0.75, 0, 0);
+
+		//モデル行列のみ変更
+		gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+
+		//三角形を描画
+		gl.drawArrays(gl.TRIANGLES, 0, n);
 	}
 
 	function initVertexBuffers(gl) {
