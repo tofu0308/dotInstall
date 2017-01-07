@@ -17,6 +17,7 @@
 		<canvas id="webgl" width="400" height="400">
 			Canvasをサポートしているブラウザを使用してくだい。
 		</canvas>
+		<p id="nearFar">near,farの表示</p>
 
 	</div>
 </section>
@@ -31,10 +32,10 @@
 	var VSHADER_SOURCE =
 	  'attribute vec4 a_Position;\n' +
 	  'attribute vec4 a_Color;\n' +
-	  'uniform mat4 u_ViewMatrix;\n' +
+	  'uniform mat4 u_ProjMatrix;\n' +
 	  'varying vec4 v_Color;\n' +
 	  'void main() {\n' +
-	  '	gl_Position = u_ViewMatrix * a_Position;\n' +
+	  '	gl_Position = u_ProjMatrix * a_Position;\n' +
 	  '	v_Color = a_Color;\n' +
 	  '}\n';
 
@@ -50,6 +51,9 @@
 
 	function main(){
 		var canvas = document.getElementById('webgl');
+
+		// nearFar要素を取得する
+		var nf = document.getElementById('nearFar');
 
 		//WebGL描画用のコンテキストを取得
 		var gl =getWebGLContext(canvas);
@@ -73,23 +77,23 @@
 		//Canvasをクリアする色を設定
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-		//u_ViewMatrix変数の格納場所を取得する
-		var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
-		if(!u_ViewMatrix){
-			console.log('u_ViewMatrixの格納場所の取得に失敗。');
-			return
+		//u_ProjMatrix変数の格納場所を取得する
+		var u_ProjMatrix = gl.getUniformLocation(gl.program, 'u_ProjMatrix');
+		if(!u_ProjMatrix){
+			console.log('u_ProjMatrixの格納場所の取得に失敗。');
+			return;
 		}
 
 		//ビュー行列指定のための行列を作成
-		var viewMatrix = new Matrix4();
+		var projMatrix = new Matrix4();
 
 		//キー押下時のイベントハンドラ設定
 		document.onkeydown = function(ev){
-			keydown(ev, gl, n, u_ViewMatrix, viewMatrix);
+			keydown(ev, gl, n, u_ProjMatrix, projMatrix, nf);
 		};
 
 		//描画
-		draw(gl, n, u_ViewMatrix, viewMatrix);
+		draw(gl, n, u_ProjMatrix, projMatrix, nf);
 	}
 
 	function initVertexBuffers(gl) {
@@ -97,9 +101,9 @@
 			//頂点座標と色）（RGBA）
 			 
 			//緑（奥）
-			 0.0,  0.5, -0.4,  0.4,  1.0,  0.4,
-			-0.5, -0.5, -0.4,  0.4,  1.0,  0.4,
-			 0.5, -0.5, -0.4,  1.0,  0.4,  0.4,
+			 0.0,  0.6, -0.4,  0.4,  1.0,  0.4,
+			-0.5, -0.4, -0.4,  0.4,  1.0,  0.4,
+			 0.5, -0.4, -0.4,  1.0,  0.4,  0.4,
 
 			 //黄色（中）
 			  0.5,  0.4, -0.2,  1.0,  0.4,  0.4,
@@ -156,35 +160,35 @@
 		return n;
 	}
 
-	//視点の位置
-	var g_eyeX = 0.20;
-	var g_eyeY = 0.25;
-	var g_eyeZ = 0.25;
+	//近平面、遠平面（x100）
+	var g_near = 0;
+	var g_far = 50;
 
-	function keydown(ev, gl, n, u_ViewMatrix, viewMatrix){
-		//右矢印押下
-		if(ev.keyCode == 39){
-			g_eyeX += 0.01;
-		}else{
-			//左矢印押下
-			if(ev.keyCode == 37){
-				g_eyeX -= 0.01;
-			}else {
-				return;
-			}
+	function keydown(ev, gl, n, u_ProjMatrix, projMatrix, nf){
+		switch(ev.keyCode){
+			case 39: g_near += 1; break; //右
+			case 37: g_near -= 1; break; //左
+			case 38: g_far += 1; break; //上
+			case 40: g_far -= 1; break; //
+
+			//余分な描画をしない処理
+			default: return;
 		}
-		draw(gl, n, u_ViewMatrix, viewMatrix);
+
+		draw(gl, n, u_ProjMatrix, projMatrix, nf);
 	}
 
-	function draw(gl, n, u_ViewMatrix, viewMatrix){
-		//視点の位置、方向を指定
-		viewMatrix.setLookAt(g_eyeX, g_eyeY, g_eyeZ, 0, 0, 0, 0, 1, 0);
+	function draw(gl, n, u_ProjMatrix, projMatrix, nf){
+		projMatrix.setOrtho(-1.0, 1.0, -1.0, 1.0, g_near/100, g_far/100);
 
-		//ビュー行列をu_ViewMatrix変数に設定する
-		gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
+		//投影行列をu_ProjMatrix変数に設定
+		gl.uniformMatrix4fv(u_ProjMatrix, false, projMatrix.elements);
+
 
 		//Canvasをクリア
 		gl.clear(gl.COLOR_BUFFER_BIT);
+
+		nf.innerHTML ='near: ' + g_near/100 + ', far: ' + g_far/100 ;
 
 		//三角形描画
 		gl.drawArrays(gl.TRIANGLES, 0, n);
