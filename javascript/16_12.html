@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>WebGL+HTML5</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+</head>
+<body onload="main()">
+<h1>hello canvas</h1>
+
+<section>
+	<div>
+		<h2>hello cube</h2>
+		<canvas id="webgl" width="400" height="400">
+			Canvasをサポートしているブラウザを使用してくだい。
+		</canvas>
+
+	</div>
+</section>
+
+
+<script src="../lib/webgl/webgl-utils.js"></script>
+<script src="../lib/webgl/webgl-debug.js"></script>
+<script src="../lib/webgl/cuon-matrix.js"></script>
+<script src="../lib/webgl/cuon-utils.js"></script>
+<script>
+	//頂点シェーダのプログラム
+	var VSHADER_SOURCE =
+	  'attribute vec4 a_Position;\n' +
+	  'attribute vec4 a_Color;\n' +
+	  'uniform mat4 u_MvpMatrix;\n' +  
+	  'varying vec4 v_Color;\n' +
+	  'void main() {\n' +
+	  '	gl_Position = u_MvpMatrix * a_Position;\n' +
+	  '	v_Color = a_Color;\n' +
+	  '}\n';
+
+	// フラグメントシェーダのプログラム
+	var FSHADER_SOURCE =
+	  '#ifdef GL_ES\n' +
+	  'precision mediump float;\n' +
+	  '#endif\n' +
+	  'varying vec4 v_Color;\n' +
+	  'void main() {\n' +
+	  '	gl_FragColor = v_Color;\n' +
+	  '}\n';
+
+	function main(){
+		var canvas = document.getElementById('webgl');
+
+		//WebGL描画用のコンテキストを取得
+		var gl = getWebGLContext(canvas);
+		if(!gl){
+			console.log("WebGLコンテキストの取得に失敗");
+			return;
+		}
+
+		//シェーダを初期化
+		if(!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)){
+			console.log("シェーダの初期化に失敗");
+			return;
+		}
+
+		//頂点座標を設定
+		var n = initVertexBuffers(gl);
+		if(n < 0){
+			console.log("頂点座標の設定に失敗")
+			return;
+		}
+		//Canvasをクリアする色を設定
+		gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+		//隠面消去を有効化
+		gl.enable(gl.DEPTH_TEST);
+
+		//u_ModelMatrix, u_ViewMatrix, u_ProjMatrix変数の格納場所を取得する
+		var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix');
+		if(!u_MvpMatrix){
+			console.log('u_MvpMatrixの格納場所の取得に失敗。');
+			return;
+		}
+
+		var mvpMatrix = new Matrix4();
+
+		//視野、視点の位置、方向、上方向ベクトルを指定する
+		mvpMatrix.setPerspective(30, 1, 1, 100);
+		mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
+
+		//ビュー投影行列をu_ViewProjMatrixに設定
+		gl.uniformMatrix4fv(u_MvpMatrix, false, mvpMatrix.elements);
+
+
+		//カラーバッファ、デプスバッファをクリア
+		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+		//ポリゴンオフセット有効化
+		gl.enable(gl.POLYGON_OFFSET_FILL);
+
+		//立方体を描画する
+		gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_BYTE, 0);
+	}
+
+	function initVertexBuffers(gl) {
+
+	  // 立方体を生成する
+	  //    v6----- v5
+	  //   /|      /|
+	  //  v1------v0|
+	  //  | |     | |
+	  //  | |v7---|-|v4
+	  //  |/      |/
+	  //  v2------v3
+
+		var verticesColors = new Float32Array([
+			//頂点座標　　　　　　色
+			//v0,白
+			1.0, 1.0, 1.0,  1.0, 1.0, 1.0,
+
+			//v1 マゼンダ
+			-1.0, 1.0, 1.0,  1.0, 0.0, 1.0,
+
+			//v2,赤
+			-1.0, -1.0, 1.0,  1.0, 0.0, 0.0,
+
+			//v3 黄色
+			1.0, -1.0, 1.0,  1.0, 1.0, 0.0,
+
+			//v4 緑
+			1.0, -1.0, -1.0,     0.0,  1.0,  0.0,
+
+			//v5　シアン
+			1.0,  1.0, -1.0,     0.0,  1.0,  1.0,
+
+			//v6 青
+			-1.0,  1.0, -1.0,     0.0,  0.0,  1.0,
+
+			//v7 黒 
+			-1.0, -1.0, -1.0,     0.0,  0.0,  0.0
+		]);
+
+		//インデックス
+		var indices = new Uint8Array([
+				//前
+			    0, 1, 2,   0, 2, 3,
+
+				//右
+				0, 3, 4,   0, 4, 5,
+
+				//上
+				0, 5, 6,   0, 6, 1,
+
+				//左
+				1, 6, 7,   1, 7, 2,
+
+				//下
+				7, 4, 3,   7, 3, 2,
+
+				//奥
+				4, 7, 6,   4, 6, 5			
+			]);
+		
+		//バッファオブジェクト作成
+		var vertexColorbuffer = gl.createBuffer();
+		var indexBuffer = gl.createBuffer();
+		if(!vertexColorbuffer|| !indexBuffer){
+			console.log("バッファオブジェクト生成に失敗");
+			return -1;
+		}
+
+		//頂点の座標と色をバッファオブジェクトに書き込む
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorbuffer);
+		gl.bufferData(gl.ARRAY_BUFFER, verticesColors, gl.STATIC_DRAW);
+
+		var FSIZE = verticesColors.BYTES_PER_ELEMENT;
+
+		//a_Positionのバファオブジェクト割り当て、有効化
+		var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+		if(a_Position < 0){
+			console.log('a_Positionの格納場所の取得に失敗');
+			return -1;
+		}
+		//a_Position変数にバッファオブジェクト割り当て
+		gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 6, 0);
+
+		//バッファオブジェクトの割り当て有効化	
+		gl.enableVertexAttribArray(a_Position);
+
+		var a_Color = gl.getAttribLocation(gl.program, 'a_Color');
+		if(a_Color < 0) {
+			console.log("a_Colorの格納場所の取得に失敗");
+			return -1;
+		}
+		gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3);
+		
+		//バッファオブジェクトの割り当て有効化	
+		gl.enableVertexAttribArray(a_Color);
+
+		//バッファオブジェクトのバインド解除
+		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+		
+		return indices.length;
+	}
+
+</script>
+</body>
+</html>
